@@ -38,6 +38,7 @@ public class Juego extends Canvas implements Runnable{
         ANCHO= getWidth();
         ALTO = getHeight();
         manejador = new Manejador();
+        manejador.addObjeto(new Jugador(100,100,ObjetoId.Jugador));
         manejador.crearNivel();
      
     }

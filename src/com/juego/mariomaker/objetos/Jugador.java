@@ -12,9 +12,9 @@ import java.util.LinkedList;
 public class Jugador extends ObjetoJuego{
 
     
-    private float ancho=34, alto=64;
+    private float ancho=32, alto=64;
     
-    private float gravedad=0.5f;
+    private float gravedad=0.05f;
     public Jugador(float x, float y, ObjetoId id) {
         super(x, y, id);
     }
