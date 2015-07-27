@@ -5,7 +5,11 @@
  */
 package com.juego.mariomaker.ventana;
 
+import com.juego.mariomaker.framework.ObjetoId;
+import static com.juego.mariomaker.framework.ObjetoId.Jugador;
 import com.juego.mariomaker.framework.ObjetoJuego;
+import com.juego.mariomaker.objetos.Block;
+import com.juego.mariomaker.objetos.Jugador;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -19,16 +23,24 @@ public class Juego extends Canvas implements Runnable{
     
     private static final long version=-1213123124123131L;
     
+    
+    private float gravedad =0.05f;
+    
+    public static int ANCHO,ALTO;
+    
     private boolean running = false;
     private Thread thread;
     
-    ObjetoJuego objeto;
+    Manejador manejador;
     
-    public Juego()
+     private void init()
     {
-        objeto.getId();
+        ANCHO= getWidth();
+        ALTO = getHeight();
+        manejador = new Manejador();
+        manejador.crearNivel();
+     
     }
-    
     
     public synchronized void start(){
         if (running)
@@ -39,11 +51,18 @@ public class Juego extends Canvas implements Runnable{
         thread.start();
     }
     
+    
+    
+    
+   
+    
     public void run()
     {
+        init();
+        this.requestFocus();
         long lastTime = System.nanoTime();
         double amountOfTicks = 60.0;
-        double ns = 1000000000;
+        double ns = 1000000000/amountOfTicks;
         double delta =0;
         long timer = System.currentTimeMillis();
         int updates=0;
@@ -71,14 +90,12 @@ public class Juego extends Canvas implements Runnable{
             }
         }
         
-        System.out.println("iniciaron los Threads");
-        
     }
     
     
     private void tick()
     {
-        
+        manejador.tick();
     }
     
     private void render(){
@@ -93,9 +110,9 @@ public class Juego extends Canvas implements Runnable{
         //area de dibujo del juego
         Graphics g = bs.getDrawGraphics();
         
-        g.setColor(Color.black);
+        g.setColor(Color.gray);
         g.fillRect(0, 0, getWidth(), getHeight());
-        
+        manejador.render(g);
         //fin dibujo
         
         g.dispose();

@@ -6,6 +6,7 @@
 package com.juego.mariomaker.framework;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.util.LinkedList;
 
 /**
@@ -16,6 +17,27 @@ public abstract class ObjetoJuego {
     
     protected float x,y;
     protected ObjetoId id;
+    
+    protected boolean caida = true;
+    protected boolean salto = false;
+
+    public void setCaida(boolean caida) {
+        this.caida = caida;
+    }
+
+    public void setSalto(boolean salto) {
+        this.salto = salto;
+    }
+    
+
+    
+    public boolean isCaida() {
+        return caida;
+    }
+
+    public boolean isSalto() {
+        return salto;
+    }
     
     protected float velX=0,velY=0;
     
@@ -29,18 +51,37 @@ public abstract class ObjetoJuego {
     public abstract void tick(LinkedList<ObjetoJuego> objeto);
     public abstract void render(Graphics g);
     
-    public abstract float getX();
-    public abstract float getY();
-    public abstract void setX(float x);
-    public abstract void setY(float y);
+    public abstract Rectangle obtenTam();
     
-    public abstract float getvelX();
-    public abstract float getvelY();
-    public abstract void setvelX(float x);
-    public abstract void setvelY(float y);
+    public float getX(){
+        return x;
+    }
+    public float getY(){
+        return y;
+    }
+    public void setX(float x){
+        this.x = x;
+    }
+    public  void setY(float y){
+        this.y=y;
+    }
     
+    public float getvelX(){
+        return velX;
+    }
+    public float getvelY(){
+        return velY;
+    }
+    public void setvelX(float x){
+        this.velX=velX;
+    }
+    public void setvelY(float y){
+        this.velY=velY;
+    }
+    public ObjetoId getId(){
+        return id;
+    }
     
-    public abstract ObjetoId getId();
     
     
     
