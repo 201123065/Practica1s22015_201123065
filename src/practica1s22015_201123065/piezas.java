@@ -1,19 +1,34 @@
 
 package practica1s22015_201123065;
 
-public class piezas extends Thread{
+public class piezas {
     
-    public piezas(String msg)
+    String nombre;
+    Object imagen;
+    
+    piezas siguiente;
+    
+    public piezas(String nombre, Object imagen)
     {
-        super(msg);
+        this.nombre=nombre;
+        this.imagen=imagen;
+        siguiente=null;
+    }
+    public Object obtenerNombre()
+    {
+        return nombre;
     }
     
-    public void run(){
-        for(int i=0;i<=20;i++)
-        {
-            System.out.print(this.getName()+"\n");
-        }
-        
+    public void enlazarSiguiente(piezas n)
+    {
+        siguiente=n;
     }
+    
+    public piezas obtenerSiguiente()
+    {
+        return siguiente;
+    }
+    
+    
     
 }
