@@ -72,17 +72,14 @@ public abstract class ObjetoJuego {
     public float getvelY(){
         return velY;
     }
-    public void setvelX(float x){
+    public void setvelX(float velX){
         this.velX=velX;
     }
-    public void setvelY(float y){
+    public void setvelY(float velY){
         this.velY=velY;
     }
     public ObjetoId getId(){
         return id;
     }
-    
-    
-    
     
 }

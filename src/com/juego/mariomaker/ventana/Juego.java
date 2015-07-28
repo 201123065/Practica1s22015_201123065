@@ -5,6 +5,7 @@
  */
 package com.juego.mariomaker.ventana;
 
+import com.juego.mariomaker.framework.KeyInput;
 import com.juego.mariomaker.framework.ObjetoId;
 import static com.juego.mariomaker.framework.ObjetoId.Jugador;
 import com.juego.mariomaker.framework.ObjetoJuego;
@@ -38,8 +39,12 @@ public class Juego extends Canvas implements Runnable{
         ANCHO= getWidth();
         ALTO = getHeight();
         manejador = new Manejador();
-        manejador.addObjeto(new Jugador(100,100,ObjetoId.Jugador));
+        manejador.addObjeto(new Jugador(100,100,manejador,ObjetoId.Jugador));
         manejador.crearNivel();
+        
+        this.addKeyListener(new KeyInput(manejador));
+        
+        
      
     }
     
