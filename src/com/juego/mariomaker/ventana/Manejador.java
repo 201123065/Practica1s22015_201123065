@@ -30,7 +30,7 @@ public class Manejador {
         for(int i=0;i<objeto.size();i++)
         {
             tempObjeto = objeto.get(i);
-            
+             
             tempObjeto.render(g);
                     
         }
@@ -48,9 +48,13 @@ public class Manejador {
     
     public void crearNivel()
     {
-        for(int xx=0;xx<Juego.ANCHO+32;xx+=32)
+        for(int xx=0;xx<Juego.ANCHO+40;xx+=40)
         {
-            addObjeto(new Block(xx,Juego.ALTO-32,ObjetoId.Block));
+            addObjeto(new Block(xx,Juego.ALTO-40,ObjetoId.Block));
+        }
+        for(int i=0;i<Juego.ALTO+40;i+=40)
+        {
+            addObjeto(new Block(0,i,ObjetoId.Block));
         }
     }
     

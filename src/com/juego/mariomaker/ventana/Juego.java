@@ -21,9 +21,7 @@ import java.awt.image.BufferStrategy;
  * @author marcosmayen
  */
 public class Juego extends Canvas implements Runnable{
-    
-    private static final long version=-1213123124123131L;
-    
+   
     
     private float gravedad =0.05f;
     
@@ -116,7 +114,7 @@ public class Juego extends Canvas implements Runnable{
         //area de dibujo del juego
         Graphics g = bs.getDrawGraphics();
         
-        g.setColor(Color.gray);
+        g.setColor(Color.white);
         g.fillRect(0, 0, getWidth(), getHeight());
         manejador.render(g);
         //fin dibujo

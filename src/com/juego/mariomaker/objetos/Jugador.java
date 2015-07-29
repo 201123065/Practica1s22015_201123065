@@ -7,6 +7,7 @@ import com.juego.mariomaker.ventana.Manejador;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Label;
 import java.awt.Rectangle;
 import java.util.LinkedList;
 
@@ -14,11 +15,11 @@ import java.util.LinkedList;
 public class Jugador extends ObjetoJuego{
 
     
-    private float ancho=32, alto=64;
+    private float ancho=40, alto=40;
     
     private Manejador manejador;
     
-    private float gravedad=0.1f;
+    private float gravedad=0.7f;
     public Jugador(float x, float y,Manejador manejador, ObjetoId id) {
         super(x, y, id);
         this.manejador = manejador;
@@ -26,7 +27,7 @@ public class Jugador extends ObjetoJuego{
     public void tick(LinkedList<ObjetoJuego> objeto) {
         x+=velX;
         y+=velY;
-        if(salto|| caida)
+        if(salto || caida)
         {
             velY+=gravedad;
         }
@@ -37,11 +38,27 @@ public class Jugador extends ObjetoJuego{
         {
             ObjetoJuego temp = manejador.objeto.get(i);
             
+            //tope con bloques/paredes
             if(temp.getId()==ObjetoId.Block)
             {
+                if(obtenTop().intersects(temp.obtenTam()))
+                {
+                    y=temp.getY()+10;
+                    velY=0;
+                }
+                if(obtenDer().intersects(temp.obtenTam()))
+                {
+                    x=temp.getX()-32;
+                }
+                
+                if(obtenIzq().intersects(temp.obtenTam()))
+                {
+                    x=temp.getX()+32;
+                }
+                
                 if(obtenTam().intersects(temp.obtenTam()))
                 {
-                    
+                    y=temp.getY()-alto;
                     velY=0;
                     salto=false;
                     caida=false;
@@ -56,8 +73,8 @@ public class Jugador extends ObjetoJuego{
         
     }
     
-    
     public void render(Graphics g) {
+        
         g.setColor(Color.blue);
         g.fillRect((int)x,(int) y, (int)ancho,(int)alto);
         Graphics2D g2d = (Graphics2D)g;
@@ -69,10 +86,10 @@ public class Jugador extends ObjetoJuego{
     }
 
     public Rectangle obtenTam() {
-        return new Rectangle((int)x+5,(int)y,(int)ancho-10,(int)alto/2);
+        return new Rectangle((int)x+6,(int)y,(int)ancho-12,(int)alto);
     }
     public Rectangle obtenTop() {
-        return new Rectangle((int)x+5, (int) ((int)y+alto/2),(int)ancho-10,(int)alto/2);
+        return new Rectangle((int)x+6, (int) ((int)y+alto/2),(int)ancho-12,(int)alto/2);
     }
     
     public Rectangle obtenIzq() {
