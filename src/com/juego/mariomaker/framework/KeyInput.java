@@ -21,8 +21,8 @@ public class KeyInput extends KeyAdapter{
           ObjetoJuego temp = manejador.objeto.get(i);
           if(temp.getId()==ObjetoId.Jugador)
           {
-              if(key==KeyEvent.VK_A)temp.setvelX(-2);
-              if(key==KeyEvent.VK_D)temp.setvelX(2);
+              if(key==KeyEvent.VK_A)temp.setvelX(-6);
+              if(key==KeyEvent.VK_D)temp.setvelX(6);
               if(key==KeyEvent.VK_SPACE &&!temp.isSalto())
               {
                   temp.setSalto(true);

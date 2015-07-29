@@ -41,10 +41,15 @@ public class Jugador extends ObjetoJuego{
             //tope con bloques/paredes
             if(temp.getId()==ObjetoId.Block)
             {
-                if(obtenTop().intersects(temp.obtenTam()))
+                if(obtenIzq().intersects(temp.obtenTam()))
                 {
-                    y=temp.getY()+10;
-                    velY=0;
+                    setvelX(0);
+                }
+                if(obtenDer().intersects(temp.obtenTam()))
+                {
+                    
+                    
+                    setvelX(0);
                 }
                
                 if(obtenTam().intersects(temp.obtenTam()))

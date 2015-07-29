@@ -56,6 +56,11 @@ public class Controlador {
         {
             addObjeto(new Block(0,i,ObjetoId.Block));
         }
+        
+        for(int i=0;i<5;i++)
+        {
+            addObjeto(new Block(i*40+100,450,ObjetoId.Block));
+        }
     }
     
     

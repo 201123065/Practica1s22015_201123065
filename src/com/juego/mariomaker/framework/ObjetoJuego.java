@@ -50,7 +50,6 @@ public abstract class ObjetoJuego {
     }
     public abstract void tick(LinkedList<ObjetoJuego> objeto);
     public abstract void render(Graphics g);
-    
     public abstract Rectangle obtenTam();
     
     public float getX(){
