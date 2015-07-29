@@ -3,7 +3,7 @@ package com.juego.mariomaker.objetos;
 
 import com.juego.mariomaker.framework.ObjetoId;
 import com.juego.mariomaker.framework.ObjetoJuego;
-import com.juego.mariomaker.ventana.Manejador;
+import com.juego.mariomaker.ventana.Controlador;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -17,10 +17,10 @@ public class Jugador extends ObjetoJuego{
     
     private float ancho=40, alto=40;
     
-    private Manejador manejador;
+    private Controlador manejador;
     
-    private float gravedad=0.7f;
-    public Jugador(float x, float y,Manejador manejador, ObjetoId id) {
+    private float gravedad=0.8f;
+    public Jugador(float x, float y,Controlador manejador, ObjetoId id) {
         super(x, y, id);
         this.manejador = manejador;
     }
@@ -46,16 +46,7 @@ public class Jugador extends ObjetoJuego{
                     y=temp.getY()+10;
                     velY=0;
                 }
-                if(obtenDer().intersects(temp.obtenTam()))
-                {
-                    x=temp.getX()-32;
-                }
-                
-                if(obtenIzq().intersects(temp.obtenTam()))
-                {
-                    x=temp.getX()+32;
-                }
-                
+               
                 if(obtenTam().intersects(temp.obtenTam()))
                 {
                     y=temp.getY()-alto;
@@ -79,6 +70,8 @@ public class Jugador extends ObjetoJuego{
         g.fillRect((int)x,(int) y, (int)ancho,(int)alto);
         Graphics2D g2d = (Graphics2D)g;
         g.setColor(Color.red);
+      
+        
         g2d.draw(obtenTam());
         g2d.draw(obtenTop());
         g2d.draw(obtenIzq());
@@ -86,17 +79,17 @@ public class Jugador extends ObjetoJuego{
     }
 
     public Rectangle obtenTam() {
-        return new Rectangle((int)x+6,(int)y,(int)ancho-12,(int)alto);
+        return new Rectangle((int)x+7, (int) ((int)y+alto/2),(int)ancho-14,(int)alto/2);
     }
     public Rectangle obtenTop() {
-        return new Rectangle((int)x+6, (int) ((int)y+alto/2),(int)ancho-12,(int)alto/2);
+        return new Rectangle((int)x+7,(int)y,(int)ancho-14,(int)alto/2);
     }
     
     public Rectangle obtenIzq() {
         return new Rectangle((int)x,(int)y+3,5,(int)alto-6);
     }
     public Rectangle obtenDer() {
-        return new Rectangle((int) ((int)x+ancho-5),(int)y+3,5,(int)alto-6);
+        return new Rectangle((int) ((int)x+ancho-7),(int)y+3,5,(int)alto-6);
     }
     
     

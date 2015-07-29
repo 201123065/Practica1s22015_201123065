@@ -30,13 +30,13 @@ public class Juego extends Canvas implements Runnable{
     private boolean running = false;
     private Thread thread;
     
-    Manejador manejador;
+    Controlador manejador;
     
      private void init()
     {
         ANCHO= getWidth();
         ALTO = getHeight();
-        manejador = new Manejador();
+        manejador = new Controlador();
         manejador.addObjeto(new Jugador(100,100,manejador,ObjetoId.Jugador));
         manejador.crearNivel();
         

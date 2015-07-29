@@ -9,7 +9,7 @@ import java.awt.Graphics;
 import java.util.LinkedList;
 
 
-public class Manejador {
+public class Controlador {
     public LinkedList<ObjetoJuego> objeto = new LinkedList<ObjetoJuego>();
     
     private ObjetoJuego tempObjeto;
@@ -52,7 +52,7 @@ public class Manejador {
         {
             addObjeto(new Block(xx,Juego.ALTO-40,ObjetoId.Block));
         }
-        for(int i=0;i<Juego.ALTO+40;i+=40)
+        for(int i=Juego.ALTO;i>40;i-=40)
         {
             addObjeto(new Block(0,i,ObjetoId.Block));
         }

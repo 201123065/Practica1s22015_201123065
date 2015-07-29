@@ -1,15 +1,15 @@
 
 package com.juego.mariomaker.framework;
 
-import com.juego.mariomaker.ventana.Manejador;
+import com.juego.mariomaker.ventana.Controlador;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 
 public class KeyInput extends KeyAdapter{
     
-    Manejador manejador;
-    public KeyInput(Manejador manejador){
+    Controlador manejador;
+    public KeyInput(Controlador manejador){
         this.manejador = manejador;
     }
     
