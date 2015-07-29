@@ -3,10 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/marcosmayen/NetBeansProjects/Practica1s22015_201123065/src/com/juego/mariomaker/ventana/Juego.java</file>
-            <file>file:/Users/marcosmayen/NetBeansProjects/Practica1s22015_201123065/src/com/juego/mariomaker/framework/ObjetoJuego.java</file>
-            <file>file:/Users/marcosmayen/NetBeansProjects/Practica1s22015_201123065/src/com/juego/mariomaker/objetos/Block.java</file>
-            <file>file:/Users/marcosmayen/NetBeansProjects/Practica1s22015_201123065/src/com/juego/mariomaker/ventana/Manejador.java</file>
+            <file>file:/C:/Users/VENTAS/Documents/GitHub/PRACTICA/Practica1s22015_201123065/src/com/juego/mariomaker/framework/ObjetoJuego.java</file>
+            <file>file:/C:/Users/VENTAS/Documents/GitHub/PRACTICA/Practica1s22015_201123065/src/com/juego/mariomaker/ventana/Ventana.java</file>
+            <file>file:/C:/Users/VENTAS/Documents/GitHub/PRACTICA/Practica1s22015_201123065/src/com/juego/mariomaker/ventana/Juego.java</file>
+            <file>file:/C:/Users/VENTAS/Documents/GitHub/PRACTICA/Practica1s22015_201123065/src/com/juego/mariomaker/ventana/Inicial.java</file>
+            <file>file:/C:/Users/VENTAS/Documents/GitHub/PRACTICA/Practica1s22015_201123065/src/com/juego/mariomaker/ventana/Controlador.java</file>
+            <file>file:/C:/Users/VENTAS/Documents/GitHub/PRACTICA/Practica1s22015_201123065/src/com/juego/mariomaker/framework/KeyInput.java</file>
+            <file>file:/C:/Users/VENTAS/Documents/GitHub/PRACTICA/Practica1s22015_201123065/src/com/juego/mariomaker/objetos/Jugador.java</file>
         </group>
     </open-files>
 </project-private>
