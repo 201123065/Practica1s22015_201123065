@@ -36,6 +36,13 @@ public class Controlador {
         }
     }
     
+    public void cambiaPantalla()
+    {
+        objeto.clear();
+    }
+    
+    
+    
     public void addObjeto(ObjetoJuego objeto)
     {
         this.objeto.add(objeto);

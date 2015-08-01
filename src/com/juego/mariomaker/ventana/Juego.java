@@ -15,6 +15,7 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import javax.swing.JFrame;
 
 /**
  *
@@ -126,7 +127,11 @@ public class Juego extends Canvas implements Runnable{
     
     public static void main(String Args[])
     {
-        new Ventana(800,600,"Mario Maker", new Juego());
+        Personaje op = new Personaje();
+        /*Principal op = new Principal();
+        op.setVisible(true);
+        //new Ventana(800,600,"Mario Maker", new Juego());*/
+        
     }
     
 }

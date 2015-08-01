@@ -14,31 +14,34 @@ import java.util.LinkedList;
  * @author marcosmayen
  */
 public abstract class ObjetoJuego {
-    
+    //direccion de movimiento
     protected float x,y;
+    //objeto
     protected ObjetoId id;
     
+    //accion caida/salto
     protected boolean caida = true;
     protected boolean salto = false;
-
+    //caida
     public void setCaida(boolean caida) {
         this.caida = caida;
     }
-
+    //salto
     public void setSalto(boolean salto) {
         this.salto = salto;
     }
     
 
-    
+    //si cae
     public boolean isCaida() {
         return caida;
     }
 
+    //si salta
     public boolean isSalto() {
         return salto;
     }
-    
+    //velocidad
     protected float velX=0,velY=0;
     
     public ObjetoJuego(float x, float y, ObjetoId id)
