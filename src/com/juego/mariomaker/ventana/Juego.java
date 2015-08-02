@@ -9,6 +9,7 @@ import com.juego.mariomaker.framework.KeyInput;
 import com.juego.mariomaker.framework.ObjetoId;
 import static com.juego.mariomaker.framework.ObjetoId.Jugador;
 import com.juego.mariomaker.framework.ObjetoJuego;
+import com.juego.mariomaker.framework.archivo;
 import com.juego.mariomaker.objetos.Block;
 import com.juego.mariomaker.objetos.Jugador;
 import java.awt.Canvas;
@@ -127,9 +128,9 @@ public class Juego extends Canvas implements Runnable{
     
     public static void main(String Args[])
     {
+        archivo crear = new archivo();
+        crear.crearTxt("listaS.txt", "");
         Personaje op = new Personaje();
-        /*Principal op = new Principal();
-        op.setVisible(true);
         //new Ventana(800,600,"Mario Maker", new Juego());*/
         
     }

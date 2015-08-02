@@ -10,7 +10,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.image.BufferedImage;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -32,7 +34,7 @@ public class Personaje implements ActionListener,FocusListener{
     public Personaje()
     {
         JFrame pantalla = new JFrame("Mario Maker/Personajes");
-        pantalla.setSize(1200,700);
+        pantalla.setSize(1000,700);
         pantalla.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         JPanel panel = new JPanel();
@@ -45,11 +47,18 @@ public class Personaje implements ActionListener,FocusListener{
             panel.add(llenarMenu(i));
             panel.add(texto(i));
             panel.add(boton(i));
+            panel.add(visualizar(i));
         }
-        pantalla.add(panel);
+        
         //agregar campos textfield
        
+        //boton para cargar 
+        JButton cargarP = new JButton("cargar pantalla");
+        cargarP.addActionListener(this);
+        cargarP.setBounds(800, 500, 100, 100);
+        panel.add(cargarP);
         
+        pantalla.add(panel);
         pantalla.setVisible(true);
     }
     
@@ -112,14 +121,61 @@ public class Personaje implements ActionListener,FocusListener{
         boton.addActionListener(this);
         return boton;
     }
-    
+    public JButton visualizar(int i)
+    {
+        ImageIcon icon = new ImageIcon(getClass().getResource("/com/juego/mariomaker/personajes/eye.png"));
+        Image refac = icon.getImage();
+        Image Ima = refac.getScaledInstance(40, 40, java.awt.Image.SCALE_DEFAULT);
+        Icon ico = new ImageIcon(Ima);
+        
+        
+        JButton boton= new JButton(ico);
+        
+        boton.setBounds(690, i*70+50, 50, 50);
+        boton.addActionListener(this);
+        return boton;
+    }
     
     @Override
     public void actionPerformed(ActionEvent e) {
         String objeto = e.getSource().toString();
-        if(objeto.contains("630,50,"));
+        int i=0;
+              if(objeto.contains("630,50,")) i=0;
+        else if(objeto.contains("630,120,")) i=1;
+        else if(objeto.contains("630,190,")) i=2;
+        else if(objeto.contains("630,260,")) i=3;
+        else if(objeto.contains("630,330,")) i=4;
+        else if(objeto.contains("630,400,")) i=5;
+        else if(objeto.contains("630,470,")) i=6;
+        else if(objeto.contains("630,540,")) i=7;
+         //----------------------------retorno de valor del carro--------------     
+        
+        System.out.println(objeto);
         
     }
+    public void retornaC(int i){
+        switch (i){
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+            
+        }
+                
+    }
+    
     @Override
     public void focusGained(FocusEvent e) {
         
