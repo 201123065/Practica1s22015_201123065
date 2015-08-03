@@ -1,7 +1,6 @@
 
 package com.juego.mariomaker.ventana;
 
-import java.applet.AudioClip;
 import java.awt.Button;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -30,14 +29,10 @@ public class Personaje implements ActionListener,FocusListener{
         {
             Listado[i]="";
         }
-        audio();
     }
     
     public Personaje()
     {
-        AudioClip sonido;
-        sonido = java.applet.Applet.newAudioClip(getClass().getResource("/com/juego/mariomaker/personajes/mario.wav"));
-        sonido.play();
         JFrame pantalla = new JFrame("Mario Maker/Personajes");
         pantalla.setSize(1300,700);
         pantalla.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -56,23 +51,23 @@ public class Personaje implements ActionListener,FocusListener{
         }
         
         //agregar campos textfield
+        panel.add(JLabelDinamico());
        
         //boton para cargar 
         JButton cargarP = new JButton("cargar pantalla");
         cargarP.addActionListener(this);
-        cargarP.setBounds(800, 500, 100, 100);
+        cargarP.setBounds(800, 550, 100, 50);
         panel.add(cargarP);
         
         pantalla.add(panel);
         pantalla.setVisible(true);
     }
-    
-    public void audio()
-    {
-        AudioClip sonido;
-        sonido = java.applet.Applet.newAudioClip(getClass().getResource("/com/juego/mariomaker/personajes/yoshi.mp3"));
-        sonido.play();
-    }
+    /*este JLABELDINAMICO lo que hace es que muestra los objetos que se tienen en la lista*/
+   public JButton JLabelDinamico(){
+       JButton etiqueta = new JButton("hola :D");
+       etiqueta.setBounds(750, 50, 500, 500);
+       return etiqueta;
+   }
     
     public JTextField texto(int i)
     {
@@ -146,7 +141,6 @@ public class Personaje implements ActionListener,FocusListener{
         boton.addActionListener(this);
         return boton;
     }
-    
     @Override
     public void actionPerformed(ActionEvent e) {
         String objeto = e.getSource().toString();
@@ -161,7 +155,7 @@ public class Personaje implements ActionListener,FocusListener{
         else if(objeto.contains("630,540,")) i=7;
          //----------------------------retorno de valor del carro--------------     
         
-        System.out.println(objeto);
+        System.out.println(i);
         
     }
     public void retornaC(int i){

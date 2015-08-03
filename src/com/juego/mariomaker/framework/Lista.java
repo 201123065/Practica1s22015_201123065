@@ -1,52 +1,95 @@
 
 package com.juego.mariomaker.framework;
 
+import javax.swing.JOptionPane;
+
 public class Lista {
-    protected Nodo inicio,fin;
-    public Lista()
-    {
-        inicio=null;
-        fin=null;
-    }
+    private NodoD inicio,fin;
     
-    //agrega al inicio
-    public void agregarAlInicio(int elemento)
-    {
-        inicio = new Nodo(elemento,inicio);
-        if(fin==null)
-        {
-            fin=inicio;
-        }
+    public Lista(){
+        inicio=fin=null;
     }
-    //agrega al final
-    public void agregarAlFinal(int elemento)
-    {
-        if(estaVacia())
-        {
-            inicio=fin=new Nodo(elemento);
-        }
-        else
-        {
-            fin.Siguiente=new Nodo(elemento);
-            fin= fin.Siguiente;
-        }
-    }
-    
-    
-    //verificar si esta vacia
     public boolean estaVacia(){
-        return (inicio==null)?true:false;
+        return inicio==null;
     }
-    
-    //muestra la lista de datos
-    public void MostrarLista()
+    //agregar al final
+    public void NodoFinal(Object o)
     {
-        Nodo recorrer = inicio;
-        while(recorrer!=null)
+        if(!estaVacia())
         {
-            System.out.print("["+recorrer.valor+"]--≥");
-            recorrer=recorrer.Siguiente;
+            fin=new NodoD(o, null, fin);
+            fin.anterior.siguiente=fin;
+        }else
+        {
+            inicio=fin=new NodoD(o);
         }
     }
-    
+    //agregar al inicio
+    public void NodoInicio(Object o)
+    {
+        if(!estaVacia())
+        {
+            inicio=new NodoD(o,inicio, null);
+            inicio.siguiente.anterior=inicio;
+        }else
+        {
+            inicio=fin=new NodoD(o);
+        }
+    }
+    //mostrar la lista
+    public void mostrarListaIF()
+    {
+        if(!estaVacia())
+        {
+            String datos="<=>";
+            NodoD aux=inicio;
+            while(aux!=null)
+            {
+                datos=datos+"["+aux.dato+"]<=>";
+                aux=aux.siguiente;
+            }
+            JOptionPane.showMessageDialog(null, datos, "lista",
+                    JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+    public void mostrarListaFI(){
+        if(!estaVacia())
+            {
+                String datos="<=>";
+                NodoD aux=fin;
+                while(aux!=null)
+                {
+                    datos=datos+"["+aux.dato+"]<=>";
+                    aux=aux.anterior;
+                }
+                JOptionPane.showMessageDialog(null, datos, "lista",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    //eliminar del inicio
+    public Object eliminarInicio()
+    {
+        Object elemento = inicio.dato;
+        if(inicio==fin){
+            inicio=fin=null;
+        }else
+        {
+            inicio=inicio.siguiente;
+            inicio.anterior=null;
+        }
+        return elemento;
+    }
+    public Object eliminarFinal()
+    {
+        Object elemento = fin.dato;
+        if(inicio==fin){
+            inicio=fin=null;
+        }else
+        {
+            fin=fin.anterior;
+            fin.siguiente=null;
+            
+        }
+        return elemento;
+    }
 }
