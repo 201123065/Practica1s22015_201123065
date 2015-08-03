@@ -3,23 +3,21 @@ package com.juego.mariomaker.framework;
 
 
 public class Nodo {
-    Object valor;
-    Nodo Siguiente;
+    public int valor;
+    public Nodo Siguiente;
     
-    public Nodo(Object valor)
+    public Nodo(int valor)
     {
         this.valor=valor;
+        this.Siguiente=null;
     }
     
-    public void Siguiente(Nodo n)
+    public Nodo(int valor, Nodo n)
     {
-        Siguiente =n;
-    }
-    public Object ObtenerValor(){
-        return valor;
+        this.valor = valor;
+        Siguiente = n;
+        
     }
     
-    public Nodo getSiguiente(){
-        return Siguiente;
-    }
+    
 }

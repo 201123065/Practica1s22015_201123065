@@ -1,6 +1,7 @@
 
 package com.juego.mariomaker.ventana;
 
+import java.applet.AudioClip;
 import java.awt.Button;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -29,12 +30,16 @@ public class Personaje implements ActionListener,FocusListener{
         {
             Listado[i]="";
         }
+        audio();
     }
     
     public Personaje()
     {
+        AudioClip sonido;
+        sonido = java.applet.Applet.newAudioClip(getClass().getResource("/com/juego/mariomaker/personajes/mario.wav"));
+        sonido.play();
         JFrame pantalla = new JFrame("Mario Maker/Personajes");
-        pantalla.setSize(1000,700);
+        pantalla.setSize(1300,700);
         pantalla.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         JPanel panel = new JPanel();
@@ -62,6 +67,12 @@ public class Personaje implements ActionListener,FocusListener{
         pantalla.setVisible(true);
     }
     
+    public void audio()
+    {
+        AudioClip sonido;
+        sonido = java.applet.Applet.newAudioClip(getClass().getResource("/com/juego/mariomaker/personajes/yoshi.mp3"));
+        sonido.play();
+    }
     
     public JTextField texto(int i)
     {

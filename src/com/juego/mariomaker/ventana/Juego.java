@@ -6,6 +6,7 @@
 package com.juego.mariomaker.ventana;
 
 import com.juego.mariomaker.framework.KeyInput;
+import com.juego.mariomaker.framework.Lista;
 import com.juego.mariomaker.framework.ObjetoId;
 import static com.juego.mariomaker.framework.ObjetoId.Jugador;
 import com.juego.mariomaker.framework.ObjetoJuego;
@@ -17,6 +18,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -128,11 +130,59 @@ public class Juego extends Canvas implements Runnable{
     
     public static void main(String Args[])
     {
+        
+        int op=0,e1;
+        Lista lista = new Lista();
+        do{
+            try{
+                op=Integer.parseInt(JOptionPane.showInputDialog(null, 
+                        "1,-add"+
+                        "\n2.-ver"+
+                        "\n3.-salir"+
+                        "\n4,final","opcionMenu",3));
+                switch(op)
+                {
+                    case 1:
+                        try{
+                            e1=Integer.parseInt(JOptionPane.showInputDialog(null,"ingrese",":D",3));
+                            lista.agregarAlInicio(e1);
+                        }catch(NumberFormatException e)
+                        {
+                            
+                        }
+                        
+                         
+                        break;
+                    case 2:
+                        lista.MostrarLista();
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        try{
+                            e1=Integer.parseInt(JOptionPane.showInputDialog(null,"ingrese",":D",3));
+                            lista.agregarAlFinal(e1);
+                        }catch(NumberFormatException e)
+                        {
+                            
+                        }
+                        
+                        
+                        break;
+                }
+            }catch(Exception e)
+            {
+                
+            }
+            
+        }while(op!=3);
+        /*
         archivo crear = new archivo();
         crear.crearTxt("listaS.txt", "");
-        Personaje op = new Personaje();
-        //new Ventana(800,600,"Mario Maker", new Juego());*/
+        Personaje op = new Personaje();/**/
+        /*new Ventana(800,600,"Mario Maker", new Juego());/**/
         
     }
+    
     
 }
