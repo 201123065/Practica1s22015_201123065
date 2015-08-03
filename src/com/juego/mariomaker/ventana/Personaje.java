@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
@@ -33,32 +34,62 @@ public class Personaje implements ActionListener,FocusListener{
     
     public Personaje()
     {
+        init();
+        //constructor para crea la pantalla
         JFrame pantalla = new JFrame("Mario Maker/Personajes");
+        //tamaño 
         pantalla.setSize(1300,700);
         pantalla.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
+        //panel para colocar botones/labels sin tener problemas con el tamaño
         JPanel panel = new JPanel();
         panel.setLayout(null);
         panel.setBackground(Color.white);
         
         //agrego matriz de JLabels
-        
         for (int i=0;i<8;i++){
+            //imagenes de los personajes
             panel.add(llenarMenu(i));
+            //jtextfields para agregar datos
             panel.add(texto(i));
+            //botones de carga
             panel.add(boton(i));
+            //boton con ojito (0), sirve para ver el nodo en grafico
             panel.add(visualizar(i));
         }
         
         //agregar campos textfield
-        panel.add(JLabelDinamico());
+       //boton de siguiente/anterior
+       JButton siguiente = new JButton(">>");
+       JButton anterior = new JButton("<<");
+       siguiente.setBounds(1220, 570, 30, 30);
+       siguiente.addActionListener(this);
+       anterior.setBounds(750, 570, 30, 30);
+       anterior.addActionListener(this);
+       //jtexfield para modificar personaje.
+       JTextField editor = new JTextField();
+       editor.setBounds(900, 570, 200, 30);
+       //boton permite editar
+       JButton editaB= new JButton("modificar");
+       editaB.setBounds(800, 570, 100, 30);
+       editaB.addActionListener(this);
+       //boton eliminar nodo
+       JButton eliminar = new JButton("eliminar");
+       eliminar.setBounds(1120, 570, 100, 30);
+       eliminar.addActionListener(this);
+       panel.add(eliminar);
+       panel.add(editaB);
+       panel.add(editor);
+       panel.add(siguiente);
+       panel.add(anterior);
+       
        
         //boton para cargar 
         JButton cargarP = new JButton("cargar pantalla");
         cargarP.addActionListener(this);
-        cargarP.setBounds(800, 550, 100, 50);
+        cargarP.setBounds(1050, 600, 150, 50);
         panel.add(cargarP);
-        
+        panel.add(JLabelDinamico());
         pantalla.add(panel);
         pantalla.setVisible(true);
     }
@@ -68,6 +99,9 @@ public class Personaje implements ActionListener,FocusListener{
        etiqueta.setBounds(750, 50, 500, 500);
        return etiqueta;
    }
+   
+   
+   
     
     public JTextField texto(int i)
     {
@@ -141,23 +175,8 @@ public class Personaje implements ActionListener,FocusListener{
         boton.addActionListener(this);
         return boton;
     }
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        String objeto = e.getSource().toString();
-        int i=0;
-              if(objeto.contains("630,50,")) i=0;
-        else if(objeto.contains("630,120,")) i=1;
-        else if(objeto.contains("630,190,")) i=2;
-        else if(objeto.contains("630,260,")) i=3;
-        else if(objeto.contains("630,330,")) i=4;
-        else if(objeto.contains("630,400,")) i=5;
-        else if(objeto.contains("630,470,")) i=6;
-        else if(objeto.contains("630,540,")) i=7;
-         //----------------------------retorno de valor del carro--------------     
-        
-        System.out.println(i);
-        
-    }
+   
+    
     public void retornaC(int i){
         switch (i){
             case 0:
@@ -188,23 +207,75 @@ public class Personaje implements ActionListener,FocusListener{
     @Override
     public void focusLost(FocusEvent e) {
         JTextField campo =(JTextField)e.getSource();
-        if(campo.getText().equals("")||campo.getText().equals(null)){
-            
-        }else{
+        if(!campo.getText().equals("")){
             String guarda = campo.getText();
 
-            int i=7;
-                  if(e.paramString().contains("100,50,"))   i=0;
-            else if(e.paramString().contains("100,120,"))   i=1;
-            else if(e.paramString().contains("100,190,"))   i=2;
-            else if(e.paramString().contains("100,260,"))   i=3;
-            else if(e.paramString().contains("100,330,"))   i=4;
-            else if(e.paramString().contains("100,400,"))   i=5;
-            else if(e.paramString().contains("100,470,"))   i=6;
-            else if(e.paramString().contains("100,540,"))   i=7;
+            int i=-1;
+                  if(e.toString().contains("100,50,")) i=0;
+            else if(e.toString().contains("100,120,")) i=1;
+            else if(e.toString().contains("100,190,")) i=2;
+            else if(e.toString().contains("100,260,")) i=3;
+            else if(e.toString().contains("100,330,")) i=4;
+            else if(e.toString().contains("100,400,")) i=5;
+            else if(e.toString().contains("100,470,")) i=6;
+            else if(e.toString().contains("100,540,")) i=7;
             Listado[i]=guarda;
-            System.out.println(guarda);
+            System.out.println(Listado[i]);
         }
     }
+    
+    
+     @Override
+    public void actionPerformed(ActionEvent e) {
+        String objeto = e.getSource().toString();
+        int i=-1;
+        //agregar 
+            //pared
+              if(objeto.contains("630,50,")) i=0;  //pared
+        else if(objeto.contains("630,120,")) i=1;  //suelo
+        else if(objeto.contains("630,190,")) i=2;  //goomba
+        else if(objeto.contains("630,260,")) i=3;  //koopa
+        else if(objeto.contains("630,330,")) i=4;  //ficha
+        else if(objeto.contains("630,400,")) i=5;  //hongo
+        else if(objeto.contains("630,470,")) i=6;  //mario
+        else if(objeto.contains("630,540,")) i=7;  //castillo
+        else if(objeto.contains("690,50,"))  i=8;  //verPared
+        else if(objeto.contains("690,120,")) i=9;  //verSuelo
+        else if(objeto.contains("690,190,")) i=10; //verGoomba
+        else if(objeto.contains("690,260,")) i=11; //verKoopa
+        else if(objeto.contains("690,330,")) i=12; //verFicha
+        else if(objeto.contains("690,400,")) i=13; //verHongo
+        else if(objeto.contains("690,470,")) i=14; //verMario
+        else if(objeto.contains("690,540,")) i=15; //verCastillo
+        else if(objeto.contains("<<"))       i=16; //verAnterior del nodo
+        else if(objeto.contains(">>"))       i=17; //verSiguiente del nodo
+        else if(objeto.contains("modificar"))i=18; //Modificar del nodo
+        else if(objeto.contains("eliminar")) i=19; //Eliminar  del nodo
+        else if(objeto.contains("cargar"))   i=20; //sigueinte pantalla
+        
+              System.out.print(Listado[0]+",\n");
+              accion(i);
+         //----------------------------retorno de valor del carro--------------     
+        
+    }
+   
+    
+    public void accion(int i){
+        if(i<8)
+        {
+            if(Listado[i].equals(""))
+            {
+                JOptionPane.showMessageDialog(null,"la casilla esta vacia", "casilla", 3);
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null,"agregado correctamente", "casilla", 3);
+            }
+        }else if(i<16){
+            
+        }
+    }
+    
+    
     
 }
