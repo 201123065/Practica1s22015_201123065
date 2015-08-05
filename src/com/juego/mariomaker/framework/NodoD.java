@@ -8,16 +8,18 @@ package com.juego.mariomaker.framework;
 public class NodoD {
 
     public Object dato;
+    public int num;
     NodoD siguiente,anterior;
     //nodo ya cargado
     
-    public NodoD(Object dato)
+    public NodoD(Object dato,int num)
     {
-        this(dato,null,null);
+        this(dato,num,null,null);
     }
     
-    public NodoD(Object dato,NodoD sig, NodoD ant){
+    public NodoD(Object dato,int num,NodoD sig, NodoD ant){
         this.dato=dato;
+        this.num=num;
         this.siguiente=sig;
         this.anterior=ant;
     }

@@ -13,30 +13,42 @@ public class Lista {
         return inicio==null;
     }
     //agregar al final
-    public void NodoFinal(Object o)
+    public void NodoFinal(Object o,int num)
     {
         if(!estaVacia())
         {
-            fin=new NodoD(o, null, fin);
+            fin=new NodoD(o,num,null, fin);
             fin.anterior.siguiente=fin;
         }else
         {
-            inicio=fin=new NodoD(o);
+            inicio=fin=new NodoD(o,num);
         }
     }
     //agregar al inicio
-    public void NodoInicio(Object o)
+    public void NodoInicio(Object o,int num)
     {
         if(!estaVacia())
         {
-            inicio=new NodoD(o,inicio, null);
+            inicio=new NodoD(o,num,inicio, null);
             inicio.siguiente.anterior=inicio;
         }else
         {
-            inicio=fin=new NodoD(o);
+            inicio=fin=new NodoD(o,num);
         }
     }
     //mostrar la lista
+    public Object retornarValorEspecifico(Object o)
+    {
+        Object retorna=null;
+        
+        if(!estaVacia())
+        {
+            
+        }
+        return retorna;
+    }
+    
+    
     public void mostrarListaIF()
     {
         if(!estaVacia())
@@ -92,4 +104,15 @@ public class Lista {
         }
         return elemento;
     }
+    //eliminar uno en especifico
+    public Object ExisteVal(int val){
+        NodoD temporal = inicio;
+        
+        while(temporal!=null && temporal.num!=val)
+        {
+            temporal=temporal.siguiente;
+        }
+        return temporal;
+    }
+    
 }

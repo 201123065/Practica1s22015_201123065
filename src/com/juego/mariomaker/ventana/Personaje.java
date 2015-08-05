@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
+import com.juego.mariomaker.framework.Lista;
 
 public class Personaje implements ActionListener,FocusListener{
     String Listado[]= new String[8];
@@ -220,7 +221,7 @@ public class Personaje implements ActionListener,FocusListener{
             else if(e.toString().contains("100,470,")) i=6;
             else if(e.toString().contains("100,540,")) i=7;
             Listado[i]=guarda;
-            System.out.println(Listado[i]);
+            //System.out.println(Listado[i]);
         }
     }
     
@@ -253,13 +254,11 @@ public class Personaje implements ActionListener,FocusListener{
         else if(objeto.contains("eliminar")) i=19; //Eliminar  del nodo
         else if(objeto.contains("cargar"))   i=20; //sigueinte pantalla
         
-              System.out.print(Listado[0]+",\n");
-              accion(i);
+        accion(i);
          //----------------------------retorno de valor del carro--------------     
         
     }
-   
-    
+    Lista valor=new Lista();
     public void accion(int i){
         if(i<8)
         {
@@ -269,10 +268,23 @@ public class Personaje implements ActionListener,FocusListener{
             }
             else
             {
-                JOptionPane.showMessageDialog(null,"agregado correctamente", "casilla", 3);
+                try{
+                    Object []objeto={Listado[i],i};
+                    //System.out.print(objeto);
+                    valor.NodoFinal(objeto[i],i);
+                }catch(Exception e){}
             }
         }else if(i<16){
-            
+            //
+            if(!valor.estaVacia())
+            {
+                Object res [] = (Object[]) valor.ExisteVal(i-8);
+                System.out.println(res[0]);
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "esta vaciua");
+            }
         }
     }
     
