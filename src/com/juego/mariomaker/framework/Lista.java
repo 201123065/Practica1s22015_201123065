@@ -4,57 +4,92 @@ package com.juego.mariomaker.framework;
 import javax.swing.JOptionPane;
 
 public class Lista {
-    private NodoD inicio,fin;
+    private Nodo inicio,fin;
     
+    
+    public Nodo aux;
+    
+    //crea la lista;
     public Lista(){
         inicio=fin=null;
     }
+    
+    //retornar si el nodo esta vacio
     public boolean estaVacia(){
         return inicio==null;
     }
     //agregar al final
-    public void NodoFinal(Object o,int num)
+    public void AgregaFinal(String id, String nombre, String imagen)
     {
         if(!estaVacia())
         {
-            fin=new NodoD(o,num,null, fin);
+            fin=new Nodo(id,nombre,imagen,null,fin);
             fin.anterior.siguiente=fin;
+            JOptionPane.showMessageDialog(null, "agregado correctamente, ya habian antes","exito",3);
+            
         }else
         {
-            inicio=fin=new NodoD(o,num);
-        }
-    }
-    //agregar al inicio
-    public void NodoInicio(Object o,int num)
-    {
-        if(!estaVacia())
-        {
-            inicio=new NodoD(o,num,inicio, null);
-            inicio.siguiente.anterior=inicio;
-        }else
-        {
-            inicio=fin=new NodoD(o,num);
-        }
-    }
-    //mostrar la lista
-    public Object retornarValorEspecifico(Object o)
-    {
-        Object retorna=null;
-        
-        if(!estaVacia())
-        {
+            aux=inicio=fin=new Nodo(id,nombre,imagen);
+            JOptionPane.showMessageDialog(null, "agregado correctamente","exito",3);
             
         }
-        return retorna;
+    }
+    
+    //mostrar la lista
+    public Nodo retornarValorSiguiente()
+    {
+        Nodo temp;
+        if(!estaVacia())
+        {
+            if(aux.anterior==null)
+            {
+                temp =aux;
+                aux=aux.siguiente;
+                return temp;
+            }
+            else if(aux.siguiente==null)
+            {
+                JOptionPane.showMessageDialog(null, "Este es el ultimo nodo","Informacion",3);
+                return aux;
+            }
+            else
+            {
+                return aux.siguiente;
+            }
+        }
+        else
+        {
+            return aux;
+        }
     }
     
     
     public void mostrarListaIF()
     {
+        Nodo temp;
+        if(!estaVacia())
+        {
+            if(aux.siguiente!=null)
+            {
+                aux=aux.siguiente;
+            JOptionPane.showMessageDialog(null,aux.Nombre,"ERROR", 3);
+            }
+            else
+            {
+            JOptionPane.showMessageDialog(null,"Fin de la lista","ERROR", 3);
+                        
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null,"la lista esta vacia","ERROR", 3);
+        }
+            
+        /*
         if(!estaVacia())
         {
             String datos="<=>";
-            NodoD aux=inicio;
+            Nodo aux=inicio;
             while(aux!=null)
             {
                 datos=datos+"["+aux.dato+"]<=>";
@@ -62,23 +97,23 @@ public class Lista {
             }
             JOptionPane.showMessageDialog(null, datos, "lista",
                     JOptionPane.INFORMATION_MESSAGE);
-        }
+        }*/
     }
     public void mostrarListaFI(){
         if(!estaVacia())
             {
                 String datos="<=>";
-                NodoD aux=fin;
+                Nodo aux=fin;
                 while(aux!=null)
                 {
-                    datos=datos+"["+aux.dato+"]<=>";
+                    //datos=datos+"["+aux.dato+"]<=>";
                     aux=aux.anterior;
                 }
                 JOptionPane.showMessageDialog(null, datos, "lista",
                         JOptionPane.INFORMATION_MESSAGE);
             }
         }
-    //eliminar del inicio
+    /*eliminar del inicio
     public Object eliminarInicio()
     {
         Object elemento = inicio.dato;
@@ -104,15 +139,9 @@ public class Lista {
         }
         return elemento;
     }
-    //eliminar uno en especifico
-    public Object ExisteVal(int val){
-        NodoD temporal = inicio;
-        
-        while(temporal!=null && temporal.num!=val)
-        {
-            temporal=temporal.siguiente;
-        }
-        return temporal;
-    }
+    */
+    
+    
+    
     
 }
