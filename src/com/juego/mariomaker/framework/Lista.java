@@ -35,6 +35,65 @@ public class Lista {
         }
     }
     
+    public void ModificarDato(String id, String nombre)
+    {
+        Nodo temporal=inicio;
+        if(!estaVacia())
+        {   
+            if(inicio==fin && id==inicio.ID)
+            {
+                inicio.Nombre=nombre;
+            }
+            else if(id==inicio.ID)
+            {
+                
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "No hay datos para modificar","error",3);
+        }
+    }
+    
+    public void EliminarDato(String id, String nombre)
+    {
+        if(!estaVacia())
+        {
+            if(inicio==fin && id==inicio.ID && nombre==inicio.Nombre)
+            {
+                inicio=fin=null;
+            }
+            else if(id==inicio.ID && nombre==inicio.Nombre)
+            {
+                inicio=inicio.siguiente;   
+                inicio.siguiente.anterior=null;
+            }
+            else
+            {
+                Nodo anterior,temporal;
+                anterior=inicio;
+                temporal=inicio.siguiente;
+                while(temporal!=null&&temporal.ID!=id &&temporal.Nombre!=nombre)
+                {
+                    anterior=anterior.siguiente;
+                    temporal=temporal.siguiente;
+                }
+                if(temporal!=null)
+                {
+                    anterior.siguiente=temporal.siguiente;
+                    temporal.siguiente.anterior=anterior;
+                    if(temporal==fin)
+                    {
+                        fin=anterior;
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    
+    
     //mostrar la lista
     public Nodo retornarValorSiguiente()
     {
