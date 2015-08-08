@@ -132,11 +132,10 @@ public class Juego extends Canvas implements Runnable{
     {
         
        
-        /*
-        archivo crear = new archivo();
+        /*archivo crear = new archivo();
         crear.crearTxt("listaS.txt", "");
         Personaje op = new Personaje();/**/
-        /*new Ventana(800,600,"Mario Maker", new Juego());/**/
+        new Ventana(800,600,"Mario Maker", new Juego());/**/
         
     }
     

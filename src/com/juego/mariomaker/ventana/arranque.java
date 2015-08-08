@@ -11,7 +11,8 @@ public class arranque {
     
     public static void main(String Args[])
     {
-        Personaje arranca = new Personaje();
+        Juego op =new Juego();
+       // Personaje arranca = new Personaje();
     }
     
 }
