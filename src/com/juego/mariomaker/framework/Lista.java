@@ -41,27 +41,52 @@ public class Lista {
         Nodo temp;
         if(!estaVacia())
         {
-            if(aux.anterior==null)
+            if(aux.siguiente==null)
+            {
+                JOptionPane.showMessageDialog(null, "Este es el ultimo dato de esta lista","Informacion",3);
+                return aux;
+            }
+            else
             {
                 temp =aux;
                 aux=aux.siguiente;
                 return temp;
             }
-            else if(aux.siguiente==null)
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null,"Esta lista esta vacia","Informacion",3);
+            return null;
+        }
+    }
+    
+    
+    public Nodo retornarValorAnterior()
+    {
+        Nodo temp;
+        if(!estaVacia())
+        {
+            if(aux.anterior==null)
             {
-                JOptionPane.showMessageDialog(null, "Este es el ultimo nodo","Informacion",3);
+                JOptionPane.showMessageDialog(null, "Este es el Primer dato de esta lista","Informacion",3);
                 return aux;
             }
             else
             {
-                return aux.siguiente;
+                temp =aux;
+                aux=aux.anterior;
+                return temp;
             }
         }
         else
         {
-            return aux;
+            JOptionPane.showMessageDialog(null,"Esta lista esta vacia","Informacion",3);
+            return null;
         }
     }
+    
+    
+    
     
     
     public void mostrarListaIF()

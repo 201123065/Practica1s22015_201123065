@@ -28,8 +28,8 @@ public class Personaje  implements ActionListener,FocusListener {
     Lista Piso,Pared,Goomba,Koopa,Ficha,Hongo;
     
     String Mario,Castillo;
-    
-  
+    JLabel etiqueta;
+    JTextField editor;
     
     
     void init()
@@ -58,7 +58,7 @@ public class Personaje  implements ActionListener,FocusListener {
         //constructor para crea la pantalla
         JFrame pantalla = new JFrame("Mario Maker/Personajes");
         //tamaño 
-        pantalla.setSize(1300,700);
+        pantalla.setSize(1350,700);
         //opcion de cerrar
         pantalla.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //panel para colocar botones/labels sin tener problemas con el tamaño
@@ -74,24 +74,19 @@ public class Personaje  implements ActionListener,FocusListener {
             panel.add(texto(i));
             //botones de carga
             panel.add(boton(i));
-            //boton con ojito (0), sirve para ver el nodo en grafico
-            panel.add(visualizar(i));
+            
+            /*------------------inicio------------------------*/
+            panel.add(anterior(i));
+            panel.add(Siguiente(i));
+            /*----------------fin--------------------------*/
             
         }
         
         //agregar campos textfield
        //boton de siguiente/anterior
-        /*------------------inicio------------------------*/
-       JButton siguiente = new JButton(">>");
-       JButton anterior = new JButton("<<");
-       siguiente.setBounds(1220, 570, 30, 30);
-       siguiente.addActionListener(this);
-       anterior.setBounds(750, 570, 30, 30);
-       anterior.addActionListener(this);
-        /*----------------fin--------------------------*/
        
        //jtexfield para modificar personaje.
-       JTextField editor = new JTextField();
+       editor = new JTextField();
        editor.setBounds(900, 570, 200, 30);
        
        //boton permite editar
@@ -106,8 +101,6 @@ public class Personaje  implements ActionListener,FocusListener {
        panel.add(eliminar);
        panel.add(editaB);
        panel.add(editor);
-       panel.add(siguiente);
-       panel.add(anterior);
        
        
         //boton para cargar 
@@ -115,14 +108,20 @@ public class Personaje  implements ActionListener,FocusListener {
         cargarP.addActionListener(this);
         cargarP.setBounds(1050, 600, 150, 50);
         panel.add(cargarP);
-        panel.add(JLabelDinamico());
+        panel.add(JLabelDinamico(0));
         pantalla.add(panel);
         pantalla.setVisible(true);
     }
     /*este JLABELDINAMICO lo que hace es que muestra los objetos que se tienen en la lista*/
-   public JButton JLabelDinamico(){
-       JButton etiqueta = new JButton("hola :D");
-       etiqueta.setBounds(750, 50, 500, 500);
+   public JLabel JLabelDinamico(int i){
+       ImageIcon icon = new ImageIcon(getClass().getResource("/com/juego/mariomaker/personajes/"+retornaNombre(i)));
+        Image refac = icon.getImage();
+        Image Ima = refac.getScaledInstance(50, 50, java.awt.Image.SCALE_DEFAULT);
+        ImageIcon ico = new ImageIcon(Ima);
+            /**/
+           
+       etiqueta = new JLabel();
+       etiqueta.setBounds(800, 50, 500, 500);
        return etiqueta;
    }
    
@@ -189,19 +188,22 @@ public class Personaje  implements ActionListener,FocusListener {
     }
     
     //listado de botones ojito/visualizar
-    public JButton visualizar(int i){
-        ImageIcon icon = new ImageIcon(getClass().getResource("/com/juego/mariomaker/personajes/eye.png"));
-        Image refac = icon.getImage();
-        Image Ima = refac.getScaledInstance(40, 40, java.awt.Image.SCALE_DEFAULT);
-        Icon ico = new ImageIcon(Ima);
+    public JButton anterior(int i){
         
-        
-        JButton boton= new JButton(ico);
+        JButton boton= new JButton("<<");
         
         boton.setBounds(690, i*70+50, 50, 50);
         boton.addActionListener(this);
         return boton;
     }
+    public JButton Siguiente(int i)
+    {
+        JButton boton= new JButton(">>"); 
+        boton.setBounds(740, i*70+50, 50, 50);
+        boton.addActionListener(this);
+        return boton;
+    }
+    
    
     
     public void retornaC(int i){
@@ -272,7 +274,7 @@ public class Personaje  implements ActionListener,FocusListener {
         else if(objeto.contains("630,470,")) i=6;  //mario
         else if(objeto.contains("630,540,")) i=7;  //castillo
         
-        //ver
+        //<<
         else if(objeto.contains("690,50,"))  i=8;  //verPared
         else if(objeto.contains("690,120,")) i=9;  //verSuelo
         else if(objeto.contains("690,190,")) i=10; //verGoomba
@@ -281,17 +283,25 @@ public class Personaje  implements ActionListener,FocusListener {
         else if(objeto.contains("690,400,")) i=13; //verHongo
         else if(objeto.contains("690,470,")) i=14; //verMario
         else if(objeto.contains("690,540,")) i=15; //verCastillo
+        //>>
+        
+        else if(objeto.contains("740,50,"))  i=16;  //verPared
+        else if(objeto.contains("740,120,")) i=17;  //verSuelo
+        else if(objeto.contains("740,190,")) i=18; //verGoomba
+        else if(objeto.contains("740,260,")) i=19; //verKoopa
+        else if(objeto.contains("740,330,")) i=20; //verFicha
+        else if(objeto.contains("740,400,")) i=21; //verHongo
+        else if(objeto.contains("740,470,")) i=22; //verMario
+        else if(objeto.contains("740,540,")) i=23; //verCastillo
+        
         
         //funcion siguiente
-        else if(objeto.contains("<<"))       i=16; //verAnterior del nodo
-        //funcion atnerior
-        else if(objeto.contains(">>"))       i=17; //verSiguiente del nodo
         //modificar
-        else if(objeto.contains("modificar"))i=18; //Modificar del nodo
+        else if(objeto.contains("modificar"))i=24; //Modificar del nodo
         //eliminar
-        else if(objeto.contains("eliminar")) i=19; //Eliminar  del nodo
+        else if(objeto.contains("eliminar")) i=25; //Eliminar  del nodo
         //cargar escenario
-        else if(objeto.contains("cargar"))   i=20; //sigueinte pantalla
+        else if(objeto.contains("cargar"))   i=26; //sigueinte pantalla
         
         accion(i);
          //----------------------------retorno de valor del carro--------------     
@@ -312,23 +322,129 @@ public class Personaje  implements ActionListener,FocusListener {
                 try{
                     
                     if (RegistrarNodo(Listado[i][0],Listado[i][1],Listado[i][2],Listado[i][3])){
-                        JOptionPane.showMessageDialog(null, "agregado correctamente","exito",3);
                     }
                 }catch(Exception e){}
             }
         }else if(i<16){
-            //
-            if(!valor.estaVacia())
-            {
-                JOptionPane.showMessageDialog(null, "agregado correctamente","exito",3);
-                
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(null, "esta vacia");
-            }
+            
+            verificarA(i-8);
+        }
+        else if(i<24)
+        {
+            verificarS(i-16);
         }
     }
+    
+    
+    public void verificarA(int i)
+    {
+        String cadena="";
+        //Piso,Pared,Goomba,Koopa,Ficha,Hongo;
+        String imagen = getClass().getResource("/com/juego/mariomaker/personajes/"+retornaNombre(i)).toString();
+        try{
+            switch(i)
+            { 
+                case 0:
+                    cadena=Piso.retornarValorAnterior().Nombre;
+                    break;
+                case 1:
+                    cadena=Pared.retornarValorAnterior().Nombre;
+                    break;
+                case 2:
+                    cadena=Goomba.retornarValorAnterior().Nombre;
+                    break;
+                case 3:
+                    cadena=Koopa.retornarValorAnterior().Nombre;
+                    break;
+                case 4:
+                    cadena=Ficha.retornarValorAnterior().Nombre;
+                    break;
+                case 5:
+                    cadena=Hongo.retornarValorAnterior().Nombre;
+                    break;
+                case 6:
+                    cadena=Mario;
+                    JOptionPane.showMessageDialog(null, Mario+"ha sido agregado con exito","Personaje",3);
+                    
+                    break;
+                case 7:
+                    cadena=Castillo;
+                    JOptionPane.showMessageDialog(null,  Castillo+"ha sido agregado con exito","Informacion",3);
+                    break;
+                default: 
+                    JOptionPane.showMessageDialog(null, "error","error",3);
+                    break;
+            }      
+            ImageIcon icon = new ImageIcon(getClass().getResource("/com/juego/mariomaker/personajes/"+retornaNombre(i)));
+            Image refac = icon.getImage();
+            Image Ima = refac.getScaledInstance(500, 500, java.awt.Image.SCALE_DEFAULT);
+            ImageIcon ico = new ImageIcon(Ima);
+                /**/
+           etiqueta.setIcon(ico);
+           etiqueta.setBounds(800, 50, 500, 500);
+           editor.setText(cadena);
+           
+        }catch(Exception e){}
+    }
+    
+    public void verificarS(int i)
+    {
+        String cadena="";
+        //Piso,Pared,Goomba,Koopa,Ficha,Hongo;
+        String imagen = getClass().getResource("/com/juego/mariomaker/personajes/"+retornaNombre(i)).toString();
+        try{
+            switch(i)
+            { 
+                case 0:
+                    cadena=Piso.retornarValorSiguiente().Nombre;
+                    break;
+                case 1:
+                    cadena=Pared.retornarValorSiguiente().Nombre;
+                    break;
+                case 2:
+                    cadena=Goomba.retornarValorSiguiente().Nombre;
+                    break;
+                case 3:
+                    cadena=Koopa.retornarValorSiguiente().Nombre;
+                    break;
+                case 4:
+                    cadena=Ficha.retornarValorSiguiente().Nombre;
+                    break;
+                case 5:
+                    cadena=Hongo.retornarValorSiguiente().Nombre;
+                    break;
+                case 6:
+                    cadena=Mario;
+                    JOptionPane.showMessageDialog(null, Mario+"ha sido agregado con exito","Personaje",3);
+                    
+                    break;
+                case 7:
+                    cadena=Castillo;
+                    JOptionPane.showMessageDialog(null,  Castillo+"ha sido agregado con exito","Informacion",3);
+                    break;
+                default: 
+                    JOptionPane.showMessageDialog(null, "error","error",3);
+                    break;
+            }
+            ImageIcon icon = new ImageIcon(getClass().getResource("/com/juego/mariomaker/personajes/"+retornaNombre(i)));
+            Image refac = icon.getImage();
+            Image Ima = refac.getScaledInstance(500, 500, java.awt.Image.SCALE_DEFAULT);
+            ImageIcon ico = new ImageIcon(Ima);
+                /**/
+           etiqueta.setIcon(ico);
+           etiqueta.setBounds(800, 50, 500, 500);
+           editor.setText(cadena);
+            
+            
+        }catch(Exception e){}
+    }
+    
+    public void PaintComponent()
+    {
+        
+    }
+    
+    
     
     
     public boolean RegistrarNodo(String id,String nombre, String imagen,String tipo)
