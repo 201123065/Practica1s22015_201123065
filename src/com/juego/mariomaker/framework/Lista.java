@@ -35,28 +35,16 @@ public class Lista {
         }
     }
     
-    public void ModificarDato(String id, String nombre)
+    public void ModificarDato(String id, String nom,String nombre)
     {
-        Nodo temporal=inicio;
-        if(!estaVacia())
-        {   
-            if(inicio==fin && id==inicio.ID)
-            {
-                inicio.Nombre=nombre;
-            }
-            else if(id==inicio.ID)
-            {
-                
-            }
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(null, "No hay datos para modificar","error",3);
-        }
+        this.aux.Nombre=nombre;
     }
     
-    public void EliminarDato(String id, String nombre)
-    {
+    
+    
+    
+    
+    public void EliminarDato(String id, String nombre) {
         if(!estaVacia())
         {
             if(inicio==fin && id==inicio.ID && nombre==inicio.Nombre)
@@ -88,15 +76,11 @@ public class Lista {
                     }
                 }
             }
+            JOptionPane.showMessageDialog(null, "Dato eliminado con exito","Informacion",3);
         }
     }
-    
-    
-    
-    
     //mostrar la lista
-    public Nodo retornarValorSiguiente()
-    {
+    public Nodo retornarValorSiguiente(){
         Nodo temp;
         if(!estaVacia())
         {
@@ -119,9 +103,7 @@ public class Lista {
         }
     }
     
-    
-    public Nodo retornarValorAnterior()
-    {
+    public Nodo retornarValorAnterior(){
         Nodo temp;
         if(!estaVacia())
         {
@@ -144,12 +126,7 @@ public class Lista {
         }
     }
     
-    
-    
-    
-    
-    public void mostrarListaIF()
-    {
+    public void mostrarListaIF(){
         Nodo temp;
         if(!estaVacia())
         {

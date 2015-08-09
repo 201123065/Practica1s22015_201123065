@@ -26,8 +26,7 @@ public class Personaje  implements ActionListener,FocusListener {
     String Listado[][]= new String[8][4];
     int ID=0;
     Lista Piso,Pared,Goomba,Koopa,Ficha,Hongo;
-    
-    String Mario,Castillo;
+    String TextoTemp, Mario,Castillo;
     JLabel etiqueta;
     JTextField editor;
     
@@ -125,18 +124,13 @@ public class Personaje  implements ActionListener,FocusListener {
        return etiqueta;
    }
    
-   
-   
-    
-    public JTextField texto(int i)
-    {
+    public JTextField texto(int i){
         JTextField nuevo= new JTextField();
         nuevo.setBounds(100, i*70+50, 500, 50);
         nuevo.addFocusListener(this);
         return nuevo;
         
     }
-    
     //menu de imagenes
     public JLabel llenarMenu(int i){
         JLabel nuevo = new JLabel();
@@ -152,7 +146,6 @@ public class Personaje  implements ActionListener,FocusListener {
          }
         return nuevo;
     }
-    
     //nombre para el menu de imagenes
     public String retornaNombre(int valor){
         switch (valor){
@@ -178,15 +171,13 @@ public class Personaje  implements ActionListener,FocusListener {
               
         }
     }
-    
     //listado de botones agregar
     public Button boton(int i){
         Button boton= new Button("+");
         boton.setBounds(630, i*70+50, 50, 50);
         boton.addActionListener(this);
         return boton;
-    }
-    
+    }  
     //listado de botones ojito/visualizar
     public JButton anterior(int i){
         
@@ -204,37 +195,11 @@ public class Personaje  implements ActionListener,FocusListener {
         return boton;
     }
     
-   
-    
-    public void retornaC(int i){
-        switch (i){
-            case 0:
-                break;
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            case 6:
-                break;
-            case 7:
-                break;
-            
-        }
-                
-    }
     
     @Override
     public void focusGained(FocusEvent e) {
         
     }
-    
-    @Override
     public void focusLost(FocusEvent e) {
         JTextField campo =(JTextField)e.getSource();
         if(!campo.getText().equals("")){
@@ -254,13 +219,9 @@ public class Personaje  implements ActionListener,FocusListener {
             Listado[i][2]=getClass().getResource("/com/juego/mariomaker/personajes/"+retornaNombre(i)).toString();
             Listado[i][3]=retornaNombre(i).toString();
             ID++;
-            //System.out.println(Listado[i][0]+Listado[i][1]+Listado[i][2]+Listado[i][3]);
         }
     }
-    
-    
-     @Override
-     //accion de boton
+    //accion de boton
     public void actionPerformed(ActionEvent e) {
         String objeto = e.getSource().toString();
         int i=-1;
@@ -294,8 +255,6 @@ public class Personaje  implements ActionListener,FocusListener {
         else if(objeto.contains("740,470,")) i=22; //verMario
         else if(objeto.contains("740,540,")) i=23; //verCastillo
         
-        
-        //funcion siguiente
         //modificar
         else if(objeto.contains("modificar"))i=24; //Modificar del nodo
         //eliminar
@@ -318,7 +277,6 @@ public class Personaje  implements ActionListener,FocusListener {
             }
             else
             {
-                System.out.println(Listado[i][1]);
                 try{
                     
                     if (RegistrarNodo(Listado[i][0],Listado[i][1],Listado[i][2],Listado[i][3])){
@@ -326,18 +284,22 @@ public class Personaje  implements ActionListener,FocusListener {
                 }catch(Exception e){}
             }
         }else if(i<16){
-            
             verificarA(i-8);
+            TextoTemp=editor.getText();
         }
         else if(i<24)
         {
             verificarS(i-16);
+            TextoTemp=editor.getText();
+        }
+        else if(i==24)
+        {
+            modificar(TextoTemp);
         }
     }
     
     
-    public void verificarA(int i)
-    {
+    public void verificarA(int i){
         String cadena="";
         //Piso,Pared,Goomba,Koopa,Ficha,Hongo;
         String imagen = getClass().getResource("/com/juego/mariomaker/personajes/"+retornaNombre(i)).toString();
@@ -345,29 +307,42 @@ public class Personaje  implements ActionListener,FocusListener {
             switch(i)
             { 
                 case 0:
-                    cadena=Piso.retornarValorAnterior().Nombre;
+                    if(Piso.retornarValorAnterior()!=null)
+                        cadena=Piso.aux.Nombre;
+                    ID=0;
                     break;
                 case 1:
-                    cadena=Pared.retornarValorAnterior().Nombre;
+                    if(Pared.retornarValorAnterior()!=null)
+                        cadena=Pared.aux.Nombre;
+                    ID=1;
                     break;
                 case 2:
-                    cadena=Goomba.retornarValorAnterior().Nombre;
+                    if(Goomba.retornarValorAnterior()!=null)
+                        cadena=Goomba.aux.Nombre;
+                    ID=2;
                     break;
                 case 3:
-                    cadena=Koopa.retornarValorAnterior().Nombre;
+                    if(Koopa.retornarValorAnterior()!=null)
+                        cadena=Koopa.aux.Nombre;
+                    ID=3;
                     break;
                 case 4:
-                    cadena=Ficha.retornarValorAnterior().Nombre;
+                    if(Ficha.retornarValorAnterior()!=null)
+                        cadena=Ficha.aux.Nombre;
+                    ID=4;
                     break;
                 case 5:
-                    cadena=Hongo.retornarValorAnterior().Nombre;
+                    if(Hongo.retornarValorAnterior()!=null)
+                        cadena=Hongo.aux.Nombre;
+                    ID=5;
                     break;
                 case 6:
                     cadena=Mario;
+                    ID=6;
                     JOptionPane.showMessageDialog(null, Mario+"ha sido agregado con exito","Personaje",3);
-                    
                     break;
                 case 7:
+                    ID=7;
                     cadena=Castillo;
                     JOptionPane.showMessageDialog(null,  Castillo+"ha sido agregado con exito","Informacion",3);
                     break;
@@ -387,40 +362,50 @@ public class Personaje  implements ActionListener,FocusListener {
         }catch(Exception e){}
     }
     
-    public void verificarS(int i)
-    {
+    public void verificarS(int i){
         String cadena="";
-        //Piso,Pared,Goomba,Koopa,Ficha,Hongo;
         String imagen = getClass().getResource("/com/juego/mariomaker/personajes/"+retornaNombre(i)).toString();
         try{
             switch(i)
             { 
                 case 0:
-                    cadena=Piso.retornarValorSiguiente().Nombre;
+                    if(Piso.retornarValorSiguiente()!=null)
+                        cadena=Piso.aux.Nombre;
+                    ID=0;
                     break;
                 case 1:
-                    cadena=Pared.retornarValorSiguiente().Nombre;
+                    if(Pared.retornarValorSiguiente()!=null)
+                        cadena=Pared.aux.Nombre;
+                    ID=1;
                     break;
                 case 2:
-                    cadena=Goomba.retornarValorSiguiente().Nombre;
+                    if(Goomba.retornarValorSiguiente()!=null)
+                        cadena=Goomba.aux.Nombre;
+                    ID=2;
                     break;
                 case 3:
-                    cadena=Koopa.retornarValorSiguiente().Nombre;
+                    if(Koopa.retornarValorSiguiente()!=null)
+                        cadena=Koopa.aux.Nombre;
+                    ID=3;
                     break;
                 case 4:
-                    cadena=Ficha.retornarValorSiguiente().Nombre;
+                    if(Ficha.retornarValorSiguiente()!=null)
+                        cadena=Ficha.aux.Nombre;
+                    ID=4;
                     break;
                 case 5:
-                    cadena=Hongo.retornarValorSiguiente().Nombre;
+                    if(Hongo.retornarValorSiguiente()!=null)
+                    ID=5;
                     break;
                 case 6:
                     cadena=Mario;
                     JOptionPane.showMessageDialog(null, Mario+"ha sido agregado con exito","Personaje",3);
-                    
+                    ID=6;
                     break;
                 case 7:
                     cadena=Castillo;
                     JOptionPane.showMessageDialog(null,  Castillo+"ha sido agregado con exito","Informacion",3);
+                    ID=7;
                     break;
                 default: 
                     JOptionPane.showMessageDialog(null, "error","error",3);
@@ -439,13 +424,39 @@ public class Personaje  implements ActionListener,FocusListener {
         }catch(Exception e){}
     }
     
-    public void PaintComponent()
-    {
+    public void modificar(String cadena){
+        try{
+        switch (ID)
+        {
+             case 0:
+                    Piso.EliminarDato(Piso.aux.ID, cadena);
+                    break;
+                case 1:
+                    Pared.ModificarDato(Pared.aux.ID, Pared.aux.Nombre,cadena);
+                    break;
+                case 2:
+                    Goomba.ModificarDato(Goomba.aux.ID,Goomba.aux.Nombre, cadena);
+                    break;
+                case 3:
+                    Koopa.ModificarDato(Koopa.aux.ID, Koopa.aux.Nombre,cadena);
+                    break;
+                case 4:
+                    Ficha.ModificarDato(Ficha.aux.ID,Ficha.aux.Nombre, cadena);
+                    break;
+                case 5:
+                    Hongo.ModificarDato(Hongo.aux.ID,Hongo.aux.Nombre, cadena);
+                    break;
+                case 6:
+                    cadena=Mario;
+                    JOptionPane.showMessageDialog(null, Mario+"ha sido agregado con exito","Personaje",3);
+                    break;
+                case 7:
+                    Mario=cadena;
+                    break;
+        }
         
+        }catch(Exception e){}
     }
-    
-    
-    
     
     public boolean RegistrarNodo(String id,String nombre, String imagen,String tipo)
     {
@@ -473,40 +484,8 @@ public class Personaje  implements ActionListener,FocusListener {
         return true;
     }
     
-    public String [] RevisarNodo(int tipo)
-    {
-        
-        String id, nombre, imagen;
-        switch (tipo){
-            case 0:
-                System.out.print(Piso.retornarValorSiguiente().Nombre);
-                break;
-            case 1:
-                System.out.print(Pared.retornarValorSiguiente().Nombre);
-                break;
-            case 2:
-                System.out.print(Goomba.retornarValorSiguiente().Nombre);
-                break;
-            case 3:
-                System.out.print(Koopa.retornarValorSiguiente().Nombre);
-                break;
-            case 4:
-                System.out.print(Ficha.retornarValorSiguiente().Nombre);
-                break;
-            case 5:
-                System.out.print(Hongo.retornarValorSiguiente().Nombre);
-                break;
-            case 6:
-                System.out.print(Mario);
-                break;
-            case 7:
-                System.out.print(Castillo);
-                break;
-            
-        }
-         
-        return new String []{""};
-    }
+    
+    
     
     
     
