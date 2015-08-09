@@ -44,40 +44,49 @@ public class Lista {
     
     
     
-    public void EliminarDato(String id, String nombre) {
+    public Nodo EliminarDato(String id, String nombre) {
         if(!estaVacia())
         {
+            aux=inicio;
             if(inicio==fin && id==inicio.ID && nombre==inicio.Nombre)
             {
-                inicio=fin=null;
+                inicio=fin=aux=null;
             }
             else if(id==inicio.ID && nombre==inicio.Nombre)
             {
-                inicio=inicio.siguiente;   
-                inicio.siguiente.anterior=null;
+                inicio=inicio.siguiente;
+                inicio.anterior=null;
+                aux=inicio;
             }
             else
             {
-                Nodo anterior,temporal;
-                anterior=inicio;
-                temporal=inicio.siguiente;
+                
+                Nodo temporal;
+                temporal=aux.siguiente;
                 while(temporal!=null&&temporal.ID!=id &&temporal.Nombre!=nombre)
                 {
-                    anterior=anterior.siguiente;
+                    aux=aux.siguiente;
                     temporal=temporal.siguiente;
                 }
                 if(temporal!=null)
                 {
-                    anterior.siguiente=temporal.siguiente;
-                    temporal.siguiente.anterior=anterior;
-                    if(temporal==fin)
+                    if(temporal.siguiente==null)
                     {
-                        fin=anterior;
+                        fin.anterior.siguiente=null;
+                        fin=fin.anterior;
+                        aux=fin;
+                     
                     }
-                }
+                    else
+                    {
+                        aux.siguiente=temporal.siguiente;
+                        temporal.siguiente.anterior=aux;
+                    }
+                }/**/
             }
-            JOptionPane.showMessageDialog(null, "Dato eliminado con exito","Informacion",3);
         }
+        
+        return aux;
     }
     //mostrar la lista
     public Nodo retornarValorSiguiente(){

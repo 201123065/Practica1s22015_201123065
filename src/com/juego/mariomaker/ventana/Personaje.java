@@ -25,6 +25,7 @@ import com.juego.mariomaker.framework.Lista;
 public class Personaje  implements ActionListener,FocusListener {
     String Listado[][]= new String[8][4];
     int ID=0;
+    int dato=0;
     Lista Piso,Pared,Goomba,Koopa,Ficha,Hongo;
     String TextoTemp, Mario,Castillo;
     JLabel etiqueta;
@@ -214,11 +215,11 @@ public class Personaje  implements ActionListener,FocusListener {
             else if(e.toString().contains("100,400,")) i=5;
             else if(e.toString().contains("100,470,")) i=6;
             else if(e.toString().contains("100,540,")) i=7;
-            Listado[i][0]=ID+"";
+            Listado[i][0]=dato+"";
             Listado[i][1]=guarda;
             Listado[i][2]=getClass().getResource("/com/juego/mariomaker/personajes/"+retornaNombre(i)).toString();
             Listado[i][3]=retornaNombre(i).toString();
-            ID++;
+            dato++;
         }
     }
     //accion de boton
@@ -295,6 +296,9 @@ public class Personaje  implements ActionListener,FocusListener {
         else if(i==24)
         {
             modificar(TextoTemp);
+        }else if(i==25)
+        {
+            eliminar();
         }
     }
     
@@ -452,6 +456,40 @@ public class Personaje  implements ActionListener,FocusListener {
                     break;
                 case 7:
                     Mario=cadena;
+                    break;
+        }
+        
+        }catch(Exception e){}
+    }
+    
+    public void eliminar(){
+        try{
+        switch (ID)
+        {
+             case 0:
+                    Piso.EliminarDato(Piso.aux.ID, Piso.aux.Nombre);
+                    break;
+                case 1:
+                    Pared.EliminarDato(Pared.aux.ID, Pared.aux.Nombre);
+                    break;
+                case 2:
+                    Goomba.EliminarDato(Goomba.aux.ID,Goomba.aux.Nombre);
+                    break;
+                case 3:
+                    Koopa.EliminarDato(Koopa.aux.ID, Koopa.aux.Nombre);
+                    break;
+                case 4:
+                    Ficha.EliminarDato(Ficha.aux.ID,Ficha.aux.Nombre);
+                    break;
+                case 5:
+                    Hongo.EliminarDato(Hongo.aux.ID,Hongo.aux.Nombre);
+                    break;
+                case 6:
+                    Mario="";
+                    JOptionPane.showMessageDialog(null, Mario+"ha sido Eliminado con exito","Personaje",3);
+                    break;
+                case 7:
+                    Castillo="";
                     break;
         }
         
