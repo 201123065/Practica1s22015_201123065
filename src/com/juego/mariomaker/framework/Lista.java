@@ -61,10 +61,7 @@ public class Lista {
         }
         JOptionPane.showMessageDialog(null,nombre+" ahora es "+aux.Nombre,"Personaje",3);
     }
-    
-    
-    
-    
+  
     
     public Nodo EliminarDato(String id, String nombre) {
         if(!estaVacia())
@@ -158,81 +155,30 @@ public class Lista {
         }
     }
     
-    public void mostrarListaIF(){
-        Nodo temp;
-        if(!estaVacia())
-        {
-            if(aux.siguiente!=null)
-            {
-                aux=aux.siguiente;
-            JOptionPane.showMessageDialog(null,aux.Nombre,"ERROR", 3);
+    public String mostrarListaIF(){
+        String datos="";
+        if(!estaVacia()){
+            datos="[label = \"{<n> ";
+            Nodo nuevo = inicio;
+            while(nuevo.siguiente!=null){
+                datos=datos+nuevo.Nombre+"|";
+                nuevo=nuevo.siguiente;
             }
-            else
+            if(nuevo!=null)
             {
-            JOptionPane.showMessageDialog(null,"Fin de la lista","ERROR", 3);
-                        
+                datos=datos+nuevo.Nombre+"}\"];";
+            }else
+            {
+                datos="[label=\"{}\"];";
             }
         }
-        else
-        {
-            JOptionPane.showMessageDialog(null,"la lista esta vacia","ERROR", 3);
+        else{
+            datos="[label=\"{}\"];";
         }
-            
-        /*
-        if(!estaVacia())
-        {
-            String datos="<=>";
-            Nodo aux=inicio;
-            while(aux!=null)
-            {
-                datos=datos+"["+aux.dato+"]<=>";
-                aux=aux.siguiente;
-            }
-            JOptionPane.showMessageDialog(null, datos, "lista",
-                    JOptionPane.INFORMATION_MESSAGE);
-        }*/
+        return datos;
+        
     }
-    public void mostrarListaFI(){
-        if(!estaVacia())
-            {
-                String datos="<=>";
-                Nodo aux=fin;
-                while(aux!=null)
-                {
-                    //datos=datos+"["+aux.dato+"]<=>";
-                    aux=aux.anterior;
-                }
-                JOptionPane.showMessageDialog(null, datos, "lista",
-                        JOptionPane.INFORMATION_MESSAGE);
-            }
-        }
-    /*eliminar del inicio
-    public Object eliminarInicio()
-    {
-        Object elemento = inicio.dato;
-        if(inicio==fin){
-            inicio=fin=null;
-        }else
-        {
-            inicio=inicio.siguiente;
-            inicio.anterior=null;
-        }
-        return elemento;
-    }
-    public Object eliminarFinal()
-    {
-        Object elemento = fin.dato;
-        if(inicio==fin){
-            inicio=fin=null;
-        }else
-        {
-            fin=fin.anterior;
-            fin.siguiente=null;
-            
-        }
-        return elemento;
-    }
-    */
+   
     
     
     

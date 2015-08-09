@@ -21,13 +21,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import com.juego.mariomaker.framework.Lista;
+import com.juego.mariomaker.framework.Textos;
 
 public class Personaje  implements ActionListener,FocusListener {
     String Listado[][]= new String[8][4];
     int ID=0;
     int dato=0;
     Lista Piso,Pared,Goomba,Koopa,Ficha,Hongo;
-    String TextoTemp, Mario,Castillo;
+    String TextoTemp, Mario="",Castillo="";
     JLabel etiqueta;
     JTextField editor;
     String cadena="";
@@ -109,12 +110,19 @@ public class Personaje  implements ActionListener,FocusListener {
         cargarP.addActionListener(this);
         cargarP.setBounds(1050, 600, 150, 50);
         panel.add(cargarP);
+        
+        JButton verNodo = new JButton("ver nodo");
+        verNodo.addActionListener(this);
+        verNodo.setBounds(900, 600, 150, 50);
+        panel.add(verNodo);
+                
         panel.add(JLabelDinamico(0));
         pantalla.add(panel);
         pantalla.setVisible(true);
     }
     /*este JLABELDINAMICO lo que hace es que muestra los objetos que se tienen en la lista*/
-   public JLabel JLabelDinamico(int i){
+   
+    public JLabel JLabelDinamico(int i){
        ImageIcon icon = new ImageIcon(getClass().getResource("/com/juego/mariomaker/personajes/"+retornaNombre(i)));
         Image refac = icon.getImage();
         Image Ima = refac.getScaledInstance(50, 50, java.awt.Image.SCALE_DEFAULT);
@@ -189,14 +197,12 @@ public class Personaje  implements ActionListener,FocusListener {
         boton.addActionListener(this);
         return boton;
     }
-    public JButton Siguiente(int i)
-    {
+    public JButton Siguiente(int i){
         JButton boton= new JButton(">>"); 
         boton.setBounds(740, i*70+50, 50, 50);
         boton.addActionListener(this);
         return boton;
     }
-    
     
     @Override
     public void focusGained(FocusEvent e) {
@@ -262,8 +268,8 @@ public class Personaje  implements ActionListener,FocusListener {
         //eliminar
         else if(objeto.contains("eliminar")) i=25; //Eliminar  del nodo
         //cargar escenario
-        else if(objeto.contains("cargar"))   i=26; //sigueinte pantalla
-        
+        else if(objeto.contains("cargar"))   i=27; //sigueinte pantalla
+        else if(objeto.contains("ver nodo")) i=26;
         accion(i);
          //----------------------------retorno de valor del carro--------------     
         
@@ -301,8 +307,55 @@ public class Personaje  implements ActionListener,FocusListener {
         {
             eliminar();
         }
+        else if(i==26)
+        {
+            verPLOT();
+        }
+        else if(i==27){
+            if(Piso!=null && Pared!=null && Goomba!=null && Koopa!=null && Ficha!=null && Hongo!=null && Mario!="" && Castillo!=""  ){
+                mOrtogonal ventanaN = new mOrtogonal(Piso,Pared,Goomba,Koopa,Ficha,Hongo,Mario,Castillo);
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "por favor revise que cada nodo contenga al menos 1 objeto","error",2);
+            }
+        }
     }
     
+    public void verPLOT(){
+        String texto="digraph G {\n" +
+        "nodesep=.05;\n" +
+        "rankdir=LR;\n" +
+        " node [shape=record,width=.1,height=.1];\n" +
+        "\n" +
+        " node0 [label = \"<f0> Piso|<f1> Pared|<f2>Goomba |<f3> Koopa|<f4> Ficha|<f5>Hongo |<f6>Mario |<f7>Castillo| \",height=2.5];\n" +
+        " node [width = 1.5];";
+        String floor,wall,gom,koo,coin,toad,player,flag;
+        floor = "node1 "+Piso.mostrarListaIF()+"\n";
+        wall = "node2 "+Pared.mostrarListaIF()+"\n";
+        gom = "node3 "+Goomba.mostrarListaIF()+"\n";
+        koo = "node4 "+Koopa.mostrarListaIF()+"\n";
+        coin = "node5 "+Ficha.mostrarListaIF()+"\n";
+        toad="node6 "+Hongo.mostrarListaIF()+"\n";
+        player="node7 [label=\"{ "+Mario+" }\"];\n";
+        flag="node8 [label=\"{ "+Castillo+" }\"];\n";
+        texto=texto+floor+wall+gom+koo+coin+toad+player+flag+"\n";
+        texto = texto +"node0:f0 -> node1:n;\n" +
+        " node0:f1 -> node1:n;\n" +
+        " node0:f2 -> node2:n;\n" +
+        " node0:f3 -> node3:n;\n" +
+        " node0:f4 -> node4:n;\n" +
+        " node0:f5 -> node5:n;\n" +
+        " node0:f6 -> node6:n;\n" +
+        " node0:f7 -> node7:n;\n" +
+        " node0:f8 -> node8:n;\n}";
+        System.out.print(texto);
+        String ruta = getClass().getResource("/com/juego/mariomaker/objetos/")+"ploteo.dot";
+        Textos op = new Textos();
+        op.escribir("src/com/juego/mariomaker/objetos/plot.dot", texto);
+        PloteoGraphviz ploteo = new PloteoGraphviz();
+        ploteo.GraficarJugadores("plot.dot");
+    }
     
     public void verificarA(int i){
         //Piso,Pared,Goomba,Koopa,Ficha,Hongo;
