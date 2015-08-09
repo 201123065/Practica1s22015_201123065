@@ -19,8 +19,7 @@ public class Lista {
         return inicio==null;
     }
     //agregar al final
-    public void AgregaFinal(String id, String nombre, String imagen)
-    {
+    public void AgregaFinal(String id, String nombre, String imagen){
         if(!estaVacia())
         {
             fin=new Nodo(id,nombre,imagen,null,fin);
@@ -35,9 +34,32 @@ public class Lista {
         }
     }
     
-    public void ModificarDato(String id, String nom,String nombre)
-    {
-        this.aux.Nombre=nombre;
+    public void ModificarDato(String id, String nombre,String nom){
+        if(!estaVacia())
+        {
+            aux=inicio;
+            while(aux!=null&&aux.ID!=id &&aux.Nombre!=nombre)
+            {
+                aux=aux.siguiente;
+            }
+            if(aux!=null)
+            {
+                if(aux==inicio)
+                {
+                    inicio.Nombre=nom;
+                    aux=inicio;
+                }
+                else if(aux==fin){
+                    fin.Nombre=nom;
+                    aux=fin;
+                }
+                else
+                {
+                    aux.Nombre=nom;
+                }
+            }
+        }
+        JOptionPane.showMessageDialog(null,nombre+" ahora es "+aux.Nombre,"Personaje",3);
     }
     
     
@@ -85,6 +107,7 @@ public class Lista {
                 }/**/
             }
         }
+        JOptionPane.showMessageDialog(null, nombre+"ha sido eliminado","Personaje",3);
         
         return aux;
     }

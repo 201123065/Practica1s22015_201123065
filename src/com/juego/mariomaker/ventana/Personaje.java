@@ -30,6 +30,7 @@ public class Personaje  implements ActionListener,FocusListener {
     String TextoTemp, Mario,Castillo;
     JLabel etiqueta;
     JTextField editor;
+    String cadena="";
     
     
     void init()
@@ -295,7 +296,7 @@ public class Personaje  implements ActionListener,FocusListener {
         }
         else if(i==24)
         {
-            modificar(TextoTemp);
+            modificar(editor.getText());
         }else if(i==25)
         {
             eliminar();
@@ -304,7 +305,6 @@ public class Personaje  implements ActionListener,FocusListener {
     
     
     public void verificarA(int i){
-        String cadena="";
         //Piso,Pared,Goomba,Koopa,Ficha,Hongo;
         String imagen = getClass().getResource("/com/juego/mariomaker/personajes/"+retornaNombre(i)).toString();
         try{
@@ -367,7 +367,6 @@ public class Personaje  implements ActionListener,FocusListener {
     }
     
     public void verificarS(int i){
-        String cadena="";
         String imagen = getClass().getResource("/com/juego/mariomaker/personajes/"+retornaNombre(i)).toString();
         try{
             switch(i)
@@ -428,27 +427,27 @@ public class Personaje  implements ActionListener,FocusListener {
         }catch(Exception e){}
     }
     
-    public void modificar(String cadena){
+    public void modificar(String cadenas){
         try{
         switch (ID)
         {
              case 0:
-                    Piso.EliminarDato(Piso.aux.ID, cadena);
+                    Piso.ModificarDato(Piso.aux.ID,Piso.aux.Nombre, cadenas);
                     break;
                 case 1:
-                    Pared.ModificarDato(Pared.aux.ID, Pared.aux.Nombre,cadena);
+                    Pared.ModificarDato(Pared.aux.ID, Pared.aux.Nombre,cadenas);
                     break;
                 case 2:
-                    Goomba.ModificarDato(Goomba.aux.ID,Goomba.aux.Nombre, cadena);
+                    Goomba.ModificarDato(Goomba.aux.ID,Goomba.aux.Nombre, cadenas);
                     break;
                 case 3:
-                    Koopa.ModificarDato(Koopa.aux.ID, Koopa.aux.Nombre,cadena);
+                    Koopa.ModificarDato(Koopa.aux.ID, Koopa.aux.Nombre,cadenas);
                     break;
                 case 4:
-                    Ficha.ModificarDato(Ficha.aux.ID,Ficha.aux.Nombre, cadena);
+                    Ficha.ModificarDato(Ficha.aux.ID,Ficha.aux.Nombre, cadenas);
                     break;
                 case 5:
-                    Hongo.ModificarDato(Hongo.aux.ID,Hongo.aux.Nombre, cadena);
+                    Hongo.ModificarDato(Hongo.aux.ID,Hongo.aux.Nombre, cadenas);
                     break;
                 case 6:
                     cadena=Mario;
@@ -496,8 +495,7 @@ public class Personaje  implements ActionListener,FocusListener {
         }catch(Exception e){}
     }
     
-    public boolean RegistrarNodo(String id,String nombre, String imagen,String tipo)
-    {
+    public boolean RegistrarNodo(String id,String nombre, String imagen,String tipo){
         if(tipo== "piso.png")
             Piso.AgregaFinal(id, nombre, imagen);
         else if(tipo== "pared.png")
@@ -524,15 +522,5 @@ public class Personaje  implements ActionListener,FocusListener {
     
     
     
-    
-    
-    
-    /*
-    
-    ojo, me quede verificando los returns, por si se me olvida!!!...
-    
-    
-    
-    */
     
 }
