@@ -134,13 +134,7 @@ public class Personaje  implements ActionListener,FocusListener {
        etiqueta.setBounds(800, 50, 500, 500);
        return etiqueta;
    }
-   /*
-    ------------------------------------------------------------------------ 
-    |                                                                      |
-    |    esta seccion es para delimitar que estoy aca haciendo pruebas     | 
-    |                                                                      |
-    |______________________________________________________________________|
-    */
+  
     public JTextField texto(int i){
         JTextField nuevo= new JTextField("prueba");
         nuevo.setBounds(100, i*70+50, 500, 50);
@@ -148,14 +142,6 @@ public class Personaje  implements ActionListener,FocusListener {
         return nuevo;
         
     }
-    /*
-    ------------------------------------------------------------------------ 
-    |                                                                      |
-    |    esta seccion es para delimitar que estoy aca haciendo pruebas     | 
-    |                                                                      |
-    |______________________________________________________________________|
-    */    
-
 //menu de imagenes
     public JLabel llenarMenu(int i){
         JLabel nuevo = new JLabel();
@@ -291,6 +277,16 @@ public class Personaje  implements ActionListener,FocusListener {
     }
     Lista valor=new Lista();
     
+    
+     /*
+    ------------------------------------------------------------------------ 
+    |                                                                      |
+    |    esta seccion es para delimitar que estoy aca haciendo pruebas     | 
+    |                                                                      |
+    |______________________________________________________________________|
+    */
+    
+    
     public void accion(int i){
         if(i<8)
         {
@@ -329,10 +325,21 @@ public class Personaje  implements ActionListener,FocusListener {
         else if(i==27){
             //if(Piso!=null && Pared!=null && Goomba!=null && Koopa!=null && Ficha!=null && Hongo!=null && Mario!="" && Castillo!=""  ){
                 mOrtogonal ventanaN = new mOrtogonal(Piso,Pared,Goomba,Koopa,Ficha,Hongo,Mario,Castillo);
+                
+                
+                
                 this.pantalla.dispose();
             //}else{JOptionPane.showMessageDialog(null, "por favor revise que cada nodo contenga al menos 1 objeto","error",2);}
         }
     }
+     /*
+    ------------------------------------------------------------------------ 
+    |                                                                      |
+    |    esta seccion es para delimitar que estoy aca haciendo pruebas     | 
+    |                                                                      |
+    |______________________________________________________________________|
+    */
+    
     
     public void verPLOT(){
         String texto="digraph G {\n" +
