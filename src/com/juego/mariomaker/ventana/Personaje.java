@@ -325,7 +325,8 @@ public class Personaje  implements ActionListener,FocusListener {
         else if(i==27){
             //if(Piso!=null && Pared!=null && Goomba!=null && Koopa!=null && Ficha!=null && Hongo!=null && Mario!="" && Castillo!=""  ){
                 mOrtogonal ventanaN = new mOrtogonal(Piso,Pared,Goomba,Koopa,Ficha,Hongo,Mario,Castillo);
-                
+                ventanaN.setBounds(100, 50, 1500, 700);
+                ventanaN.setVisible(true);
                 
                 
                 this.pantalla.dispose();
