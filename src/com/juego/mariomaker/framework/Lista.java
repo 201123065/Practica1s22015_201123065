@@ -22,14 +22,15 @@ public class Lista {
     public void AgregaFinal(String id, String nombre, String imagen){
         if(!estaVacia())
         {
+            //el puntero siguiente del fin anterior es fin
             fin=new Nodo(id,nombre,imagen,null,fin);
             fin.anterior.siguiente=fin;
-            JOptionPane.showMessageDialog(null, "agregado correctamente, ya habian antes","exito",3);
+           // JOptionPane.showMessageDialog(null, "agregado correctamente, ya habian antes","exito",3);
             
         }else
         {
             aux=inicio=fin=new Nodo(id,nombre,imagen);
-            JOptionPane.showMessageDialog(null, "agregado correctamente","exito",3);
+            //JOptionPane.showMessageDialog(null, "agregado correctamente","exito",3);
             
         }
     }

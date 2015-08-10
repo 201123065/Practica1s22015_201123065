@@ -32,6 +32,7 @@ public class Personaje  implements ActionListener,FocusListener {
     JLabel etiqueta;
     JTextField editor;
     String cadena="";
+    JFrame pantalla;
     
     
     void init()
@@ -58,7 +59,7 @@ public class Personaje  implements ActionListener,FocusListener {
     {
         init();
         //constructor para crea la pantalla
-        JFrame pantalla = new JFrame("Mario Maker/Personajes");
+        pantalla = new JFrame("Mario Maker/Personajes");
         //tamaño 
         pantalla.setSize(1350,700);
         //opcion de cerrar
@@ -133,15 +134,29 @@ public class Personaje  implements ActionListener,FocusListener {
        etiqueta.setBounds(800, 50, 500, 500);
        return etiqueta;
    }
-   
+   /*
+    ------------------------------------------------------------------------ 
+    |                                                                      |
+    |    esta seccion es para delimitar que estoy aca haciendo pruebas     | 
+    |                                                                      |
+    |______________________________________________________________________|
+    */
     public JTextField texto(int i){
-        JTextField nuevo= new JTextField();
+        JTextField nuevo= new JTextField("prueba");
         nuevo.setBounds(100, i*70+50, 500, 50);
         nuevo.addFocusListener(this);
         return nuevo;
         
     }
-    //menu de imagenes
+    /*
+    ------------------------------------------------------------------------ 
+    |                                                                      |
+    |    esta seccion es para delimitar que estoy aca haciendo pruebas     | 
+    |                                                                      |
+    |______________________________________________________________________|
+    */    
+
+//menu de imagenes
     public JLabel llenarMenu(int i){
         JLabel nuevo = new JLabel();
         if(i<8){
@@ -312,13 +327,10 @@ public class Personaje  implements ActionListener,FocusListener {
             verPLOT();
         }
         else if(i==27){
-            if(Piso!=null && Pared!=null && Goomba!=null && Koopa!=null && Ficha!=null && Hongo!=null && Mario!="" && Castillo!=""  ){
+            //if(Piso!=null && Pared!=null && Goomba!=null && Koopa!=null && Ficha!=null && Hongo!=null && Mario!="" && Castillo!=""  ){
                 mOrtogonal ventanaN = new mOrtogonal(Piso,Pared,Goomba,Koopa,Ficha,Hongo,Mario,Castillo);
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(null, "por favor revise que cada nodo contenga al menos 1 objeto","error",2);
-            }
+                this.pantalla.dispose();
+            //}else{JOptionPane.showMessageDialog(null, "por favor revise que cada nodo contenga al menos 1 objeto","error",2);}
         }
     }
     

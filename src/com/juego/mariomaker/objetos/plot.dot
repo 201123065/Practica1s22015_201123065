@@ -4,14 +4,14 @@ rankdir=LR;
  node [shape=record,width=.1,height=.1];
 
  node0 [label = "<f0> Piso|<f1> Pared|<f2>Goomba |<f3> Koopa|<f4> Ficha|<f5>Hongo |<f6>Mario |<f7>Castillo| ",height=2.5];
- node [width = 1.5];node1 [label = "{<n> asd}"];
-node2 [label="{}"];
-node3 [label="{}"];
-node4 [label="{}"];
-node5 [label="{}"];
-node6 [label="{}"];
-node7 [label="{  }"];
-node8 [label="{  }"];
+ node [width = 1.5];node1 [label = "{<n> uno|uno,uno}"];
+node2 [label = "{<n> dos}"];
+node3 [label = "{<n> tres}"];
+node4 [label = "{<n> cuatro}"];
+node5 [label = "{<n> cinco}"];
+node6 [label = "{<n> seis}"];
+node7 [label="{ marayo }"];
+node8 [label="{ castello }"];
 
 node0:f0 -> node1:n;
  node0:f1 -> node1:n;
