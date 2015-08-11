@@ -314,7 +314,10 @@ public class mOrtogonal extends JFrame implements ActionListener{
                                 panel.add(temp);
                             }
                             else{
-                                String []cadena= tablaCreciente[fila][columna].split(",");
+                                String []cadena= new String[2];
+                                cadena=tablaCreciente[columna][fila].split(",");
+                                
+                                System.out.println("+++"+cadena[0]+"+++"+cadena[1]);
                                 int v= Integer.parseInt(cadena[1]);
                                 JButton temp = Boton ( 50 * columna, 50 * fila, 50, 50 ,true,v);
                                 temp.addActionListener(this);
@@ -334,13 +337,14 @@ public class mOrtogonal extends JFrame implements ActionListener{
                             temp.addActionListener(this);
                             panel.add(temp);
                         }else{
-                            if(tablaCreciente[columna][fila]=="0"){
+                            if(tablaCreciente[columna][fila]=="-"){
                                 JButton temp = Boton ( 50 * columna, 50 * fila, 50, 50 ,false,10);
                                 temp.addActionListener(this);
                                 panel.add(temp);
                             }
                             else{
-                                String []cadena= tablaCreciente[fila][columna].split(",");
+                                 String []cadena= new String[2];
+                                cadena=tablaCreciente[columna][fila].split(",");                                
                                 int v= Integer.parseInt(cadena[1]);
                                 JButton temp = Boton ( 50 * columna, 50 * fila, 50, 50 ,true,v);
                                 temp.addActionListener(this);
@@ -365,7 +369,6 @@ public class mOrtogonal extends JFrame implements ActionListener{
                                 String []cadena= new String[2];
                                 cadena=tablaCreciente[columna][fila].split(",");
                                 
-                                System.out.println("+++"+cadena[0]+"+++"+cadena[1]);
                                 int v= Integer.parseInt(cadena[1]);
                                 JButton temp = Boton ( 50 * columna, 50 * fila, 50, 50 ,true,v);
                                 temp.addActionListener(this);

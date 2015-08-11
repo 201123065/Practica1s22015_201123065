@@ -363,14 +363,14 @@ public class Personaje  implements ActionListener,FocusListener {
         flag="node8 [label=\"{ "+Castillo+" }\"];\n";
         texto=texto+floor+wall+gom+koo+coin+toad+player+flag+"\n";
         texto = texto +"node0:f0 -> node1:n;\n" +
-        " node0:f1 -> node1:n;\n" +
-        " node0:f2 -> node2:n;\n" +
-        " node0:f3 -> node3:n;\n" +
-        " node0:f4 -> node4:n;\n" +
-        " node0:f5 -> node5:n;\n" +
-        " node0:f6 -> node6:n;\n" +
-        " node0:f7 -> node7:n;\n" +
-        " node0:f8 -> node8:n;\n}";
+        " node0:f0 -> node1:n;\n" +
+        " node0:f1 -> node2:n;\n" +
+        " node0:f2 -> node3:n;\n" +
+        " node0:f3 -> node4:n;\n" +
+        " node0:f4 -> node5:n;\n" +
+        " node0:f5 -> node6:n;\n" +
+        " node0:f6 -> node7:n;\n" +
+        " node0:f7 -> node8:n;\n}";
         System.out.print(texto);
         String ruta = getClass().getResource("/com/juego/mariomaker/objetos/")+"ploteo.dot";
         Textos op = new Textos();
@@ -584,7 +584,7 @@ public class Personaje  implements ActionListener,FocusListener {
             Ficha.AgregaFinal(id, nombre, imagen);
         else if(tipo== "hongo.png")
             Hongo.AgregaFinal(id, nombre, imagen);
-        else if(tipo== "marior.gif"){
+        else if(tipo== "marioR.gif"){
              Mario=nombre;
              JOptionPane.showMessageDialog(null, Mario+"ha sido agregado con exito","Personaje",3);}
         else if(tipo== "castillo.png"){
