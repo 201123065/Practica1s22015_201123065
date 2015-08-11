@@ -6,6 +6,7 @@
 package com.juego.mariomaker.ventana;
 
 import com.juego.mariomaker.framework.Lista;
+import com.juego.mariomaker.framework.Textos;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -37,7 +38,7 @@ public class mOrtogonal extends JFrame implements ActionListener{
     JButton ploteo;
     
     String cadena="";
-    int valor=10;
+    int valor=0;
     ButtonGroup group;
     public void constructor(Lista Piso,Lista Pared,Lista Goomba,
             Lista Koopa,Lista Ficha,Lista Hongo,
@@ -135,23 +136,21 @@ public class mOrtogonal extends JFrame implements ActionListener{
 
     }
     
-
 	public void actionPerformed( ActionEvent evt ) {
             
-            
+            try{
             String objeto = evt.getSource().toString();
             
             String subCadena=objeto.substring(21,objeto.length()-408);
             String SubS[]=subCadena.split(",");
             //posicion X::= SubS[0]
-            try{
+            
                 if(objeto.contains("fila")||objeto.contains("columna")){
                     for(int i=0;i<filas;i++){
                         for(int j=0;j<columnas;j++){
                             tablaAux[j][i]=tablaCreciente[j][i];
                         }
                     }
-                    int c=columnas,f=filas;
                     if(objeto.contains("fila"))filas++;
                     if(objeto.contains("columna"))columnas++;
                     botonMat(valor);
@@ -175,20 +174,25 @@ public class mOrtogonal extends JFrame implements ActionListener{
                             }
                         }
                     }
+                     c=columnas;
+                     f=filas;
 
                     tablaAux=new String[columnas][filas];
                 }
+                else if(objeto.contains("Graficar")){
+                    GraficarDOT();
+                }
                 //Piso
                 else if(objeto.contains(",126,2,")){
+                    valor=0;
                     if(Pila.isSelected())
                         Seleccionado.setText(Piso.inicio.Nombre);
                     else
                         Seleccionado.setText(Piso.fin.Nombre);
-                    valor=0;
                 }
                 //pared
                 else if(objeto.contains(",188,2,")){
-                if(Pila.isSelected())
+                    if(Pila.isSelected())
                         Seleccionado.setText(Pared.inicio.Nombre);
                     else
                         Seleccionado.setText(Pared.fin.Nombre);
@@ -196,7 +200,7 @@ public class mOrtogonal extends JFrame implements ActionListener{
                 }
                 //goomba
                 else if(objeto.contains(",250,2,")){
-                if(Pila.isSelected())
+                    if(Pila.isSelected())
                         Seleccionado.setText(Goomba.inicio.Nombre);
                     else
                         Seleccionado.setText(Goomba.fin.Nombre);
@@ -204,7 +208,7 @@ public class mOrtogonal extends JFrame implements ActionListener{
                 }
                 //koopa
                 else if(objeto.contains(",312,2,")){
-                if(Pila.isSelected())
+                    if(Pila.isSelected())
                         Seleccionado.setText(Koopa.inicio.Nombre);
                     else
                         Seleccionado.setText(Koopa.fin.Nombre);
@@ -258,7 +262,7 @@ public class mOrtogonal extends JFrame implements ActionListener{
                         {
                             JOptionPane.showMessageDialog(null,Seleccionado.getText().toString()+"  "+x+","+y,"",2);
                             JButton nuevo= new JButton(evt.getActionCommand());
-                            tablaCreciente[x][y]=Seleccionado.getText().toString();
+                            tablaCreciente[x][y]=Seleccionado.getText().toString()+","+valor;
                             Seleccionado.setText("");
                             for(int i=0;i<filas;i++)
                             {
@@ -271,13 +275,13 @@ public class mOrtogonal extends JFrame implements ActionListener{
                         }
                         else
                             Seleccionado.setText("carita triste");
+                        
+                        vaciarPilaCola(valor);
 
                     }
 
                 }
-            }catch(Exception e){
-                
-            }
+            }catch(Exception e){}
           
 	} 
         
@@ -294,25 +298,147 @@ public class mOrtogonal extends JFrame implements ActionListener{
         
         public void botonMat(int i){
             panel.removeAll();
-            for( int fila = 0 ; fila < filas; fila++ )
-            {
-                for( int columna = 0 ; columna < columnas; columna++ )
+            if(filas>f){
+                for( int fila = 0 ; fila < filas; fila++ )
                 {
-                    if(tablaCreciente[columna][fila]=="-"){
-                        JButton temp = Boton ( 50 * columna, 50 * fila, 50, 50 ,false,10);
-                        temp.addActionListener(this);
-                        panel.add(temp);
-                    }
-                    else{
-                        JButton temp = Boton ( 50 * columna, 50 * fila, 50, 50 ,true,i);
-                        temp.addActionListener(this);
-                        panel.add(temp);
+                    for( int columna = 0 ; columna < columnas; columna++ )
+                    {
+                        if(fila==filas-1){
+                            JButton temp = Boton ( 50 * columna, 50 * fila, 50, 50 ,false,10);
+                            temp.addActionListener(this);
+                            panel.add(temp);
+                        }else{
+                            if(tablaCreciente[columna][fila]=="-"){
+                                JButton temp = Boton ( 50 * columna, 50 * fila, 50, 50 ,false,10);
+                                temp.addActionListener(this);
+                                panel.add(temp);
+                            }
+                            else{
+                                String []cadena= tablaCreciente[fila][columna].split(",");
+                                int v= Integer.parseInt(cadena[1]);
+                                JButton temp = Boton ( 50 * columna, 50 * fila, 50, 50 ,true,v);
+                                temp.addActionListener(this);
+                                panel.add(temp);
+                            }
+                        }
                     }
                 }
+            }
+            else if(columnas >c){
+                for( int fila = 0 ; fila < filas; fila++ )
+                {
+                    for( int columna = 0 ; columna < columnas; columna++ )
+                    {
+                        if(columna==columnas-1){
+                            JButton temp = Boton ( 50 * columna, 50 * fila, 50, 50 ,false,10);
+                            temp.addActionListener(this);
+                            panel.add(temp);
+                        }else{
+                            if(tablaCreciente[columna][fila]=="0"){
+                                JButton temp = Boton ( 50 * columna, 50 * fila, 50, 50 ,false,10);
+                                temp.addActionListener(this);
+                                panel.add(temp);
+                            }
+                            else{
+                                String []cadena= tablaCreciente[fila][columna].split(",");
+                                int v= Integer.parseInt(cadena[1]);
+                                JButton temp = Boton ( 50 * columna, 50 * fila, 50, 50 ,true,v);
+                                temp.addActionListener(this);
+                                panel.add(temp);
+                            }
+                        }
+                    }
+                }
+                
+            }
+            else{
+                for( int fila = 0 ; fila < filas; fila++ )
+                {
+                    for( int columna = 0 ; columna < columnas; columna++ )
+                    {
+                        if(tablaCreciente[columna][fila]=="-"){
+                                JButton temp = Boton ( 50 * columna, 50 * fila, 50, 50 ,false,10);
+                                temp.addActionListener(this);
+                                panel.add(temp);
+                            }
+                            else{
+                                String []cadena= new String[2];
+                                cadena=tablaCreciente[columna][fila].split(",");
+                                
+                                System.out.println("+++"+cadena[0]+"+++"+cadena[1]);
+                                int v= Integer.parseInt(cadena[1]);
+                                JButton temp = Boton ( 50 * columna, 50 * fila, 50, 50 ,true,v);
+                                temp.addActionListener(this);
+                                panel.add(temp);
+                            }
+                    }
+                }
+                
             }
             panel.updateUI();
         }
 
+        public void vaciarPilaCola(int i){
+            if(Pila.isSelected()){
+                System.out.print("este es pila "+valor);
+                switch (valor){
+                    case 0:
+                        Piso.EliminarInicio();
+                        break;
+                    case 1:
+                        Pared.EliminarInicio();
+                        break;
+                    case 3:
+                        Koopa.EliminarInicio();
+                        break;
+                    case 4:
+                        Ficha.EliminarInicio();
+                        break;
+                    case 5:
+                        Hongo.EliminarInicio();
+                        break;
+                    case 6:
+                        Mario="";
+                        break;
+                    case 7:
+                        Castillo="";
+                        break;
+                    case 2:
+                        Goomba.EliminarInicio();
+                        break;
+                }
+            }else{
+                switch (valor){
+                    case 0:
+                        Piso.EliminarFin();
+                        break;
+                    case 1:
+                        Pared.EliminarFin();
+                        break;
+                    case 2:
+                        Goomba.EliminarFin();
+                        break;
+                    case 3:
+                        Koopa.EliminarFin();
+                        break;
+                    case 4:
+                        Ficha.EliminarFin();
+                        break;
+                    case 5:
+                        Hongo.EliminarFin();
+                        break;
+                    case 6:
+                        Mario="";
+                        break;
+                    case 7:
+                        Castillo="";
+                        break;
+                }
+            }
+        }
+        
+        
+        
         public JButton  Boton( int pos_x, int pos_y, int ancho, int alto,boolean imagen ,int i)
         { 
             JButton boton = new JButton();
@@ -391,9 +517,33 @@ public class mOrtogonal extends JFrame implements ActionListener{
                 return null;
               
         }
-    }
         
+        
+    }
+        public void GraficarDOT(){
+            String texto="digraph G {\n";
+            String conecta="";
+            for(int i=0;i<filas-1;i++){
+                for(int j=0;j<columnas-1;j++){
+                    conecta=conecta+tablaCreciente[j][i]+"->"+tablaCreciente[j+1][i]+";\n";
+                    conecta=conecta+tablaCreciente[j+1][i]+"->"+tablaCreciente[j][i]+";\n";
+                }
+                for(int j=0;j<columnas-1;j++){
+                    conecta=conecta+tablaCreciente[j][i]+"->"+tablaCreciente[j][i+1]+";\n";
+                    conecta=conecta+tablaCreciente[j][i+1]+"->"+tablaCreciente[j][i]+";\n";
+                }
+            }
+            texto=texto+conecta+"}";
+        
+        String ruta = getClass().getResource("/com/juego/mariomaker/objetos/")+"ortogonal.dot";
+        Textos op = new Textos();
+        op.escribir("src/com/juego/mariomaker/objetos/ortogonal.dot", texto);
+        PloteoGraphviz ploteo = new PloteoGraphviz();
+        ploteo.GraficarJugadores("ortogonal.dot");
+            
+        }
         int filas=3,columnas=4;
+        int c=columnas, f=filas;
 	JButton btnFila;
         JButton btnColumna;
 	JPanel panel;
