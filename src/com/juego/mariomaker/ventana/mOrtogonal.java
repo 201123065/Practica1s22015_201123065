@@ -34,7 +34,7 @@ public class mOrtogonal extends JFrame implements ActionListener{
     Lista Piso,Pared, Goomba,Koopa,Ficha, Hongo;
     String Mario,Castillo;
     Boolean Tipo;
-    
+    JButton ploteo;
     
     String cadena="";
     int valor=0;
@@ -97,18 +97,22 @@ public class mOrtogonal extends JFrame implements ActionListener{
 	barraHerramientas.add(BCastillo);
         
         JButton juega = new JButton("INICIA EL JUEGO");
+        
         juega.addActionListener(this);
         
-	barraHerramientas.add(juega);
         
         
-        
+        ploteo = new JButton("Graficar");
+        ploteo.addActionListener(this);
 	btnFila.setText("fila");
         btnColumna.setText("columna");
 	btnFila.addActionListener(this);
         btnColumna.addActionListener(this);
+        
 	barraHerramientas.add(btnFila);
         barraHerramientas.add(btnColumna);
+        barraHerramientas.add(ploteo);
+	barraHerramientas.add(juega);
         barraHerramientas.add(Seleccionado);
 	//Colocamos el JToolBar en la parte de arriba del JFrame
 	this.add(barraHerramientas, BorderLayout.PAGE_START);
@@ -140,142 +144,139 @@ public class mOrtogonal extends JFrame implements ActionListener{
             String subCadena=objeto.substring(21,objeto.length()-408);
             String SubS[]=subCadena.split(",");
             //posicion X::= SubS[0]
-            if(objeto.contains("fila")||objeto.contains("columna")){
-                for(int i=0;i<filas;i++){
-                    for(int j=0;j<columnas;j++){
-                        tablaAux[j][i]=tablaCreciente[j][i];
-                    }
-                }
-                int c=columnas,f=filas;
-                if(objeto.contains("fila"))filas++;
-                if(objeto.contains("columna"))columnas++;
-                panel.removeAll();
-                botonMat();
-                panel.updateUI();
-                tablaCreciente=new String[columnas][filas];
-                for(int i=0;i<filas;i++){
-                    for(int j=0;j<columnas;j++){
-                        tablaCreciente[j][i]="-";
-                    }
-                }
-                if(filas>f){
-                    for(int i=0;i<f;i++){
-                        for(int j=0;j<columnas;j++){
-                            tablaCreciente[j][i]=tablaAux[j][i];
-                        }
-                    }
-                }
-                else{
+            try{
+                if(objeto.contains("fila")||objeto.contains("columna")){
                     for(int i=0;i<filas;i++){
-                        for(int j=0;j<c;j++){
-                            tablaCreciente[j][i]=tablaAux[j][i];
+                        for(int j=0;j<columnas;j++){
+                            tablaAux[j][i]=tablaCreciente[j][i];
                         }
                     }
-                }
-                
-                tablaAux=new String[columnas][filas];
-                
-                
-                
-                
-            }
-            //Piso
-            else if(objeto.contains(",126,2,")){
-                if(Pila.isSelected())
-                    Seleccionado.setText(Piso.inicio.Nombre);
-                else
-                    Seleccionado.setText(Piso.fin.Nombre);
-                valor=0;
-            }
-            //pared
-            else if(objeto.contains(",188,2,")){
-            if(Pila.isSelected())
-                    Seleccionado.setText(Pared.inicio.Nombre);
-                else
-                    Seleccionado.setText(Pared.fin.Nombre);
-                valor=1;
-            }
-            //goomba
-            else if(objeto.contains(",250,2,")){
-            if(Pila.isSelected())
-                    Seleccionado.setText(Goomba.inicio.Nombre);
-                else
-                    Seleccionado.setText(Goomba.fin.Nombre);
-                valor=2;
-            }
-            //koopa
-            else if(objeto.contains(",312,2,")){
-            if(Pila.isSelected())
-                    Seleccionado.setText(Koopa.inicio.Nombre);
-                else
-                    Seleccionado.setText(Koopa.fin.Nombre);
-                valor=3;
-            }
-            //ficha
-            else if(objeto.contains(",374,2,")){
-            if(Pila.isSelected())
-                    Seleccionado.setText(Ficha.inicio.Nombre);
-                else
-                    Seleccionado.setText(Ficha.fin.Nombre);
-                valor=4;
-            }
-            //hongo
-            else if(objeto.contains(",436,2,")){
-            if(Pila.isSelected())
-                    Seleccionado.setText(Hongo.inicio.Nombre);
-                else
-                    Seleccionado.setText(Hongo.fin.Nombre);
-                valor=5;
-            }
-            //mario
-            else if(objeto.contains(",498,2,")){
-                Seleccionado.setText(Mario);
-                valor=6;
-            }
-            //castillo
-            else if(objeto.contains(",560,2,")){
-                Seleccionado.setText(Castillo);
-                valor=7;
-            }
-            else if(objeto.contains("INICIA EL JUEGO")){
-                this.dispose();
-                new Ventana(800,600,"Mario Maker", new Juego());
-            }
-            else {
-                if(Pila.isSelected()){
-                    Tipo=true;
-                }else
-                {
-                    Tipo=false;
-                }
-                if (Seleccionado.getText().equals("")){
-                    JOptionPane.showMessageDialog(null,SubS[0]+","+SubS[1]+"no carga porque no \n"
-                            + "se le ha asignado ningun dato","advertencia", 2);
-                }
-                else{
-                    int x=Integer.parseInt(SubS[0])/50,y=Integer.parseInt(SubS[1])/50;
-                    System.out.println(objeto);
-                    if(objeto.contains(SubS[0]+","+SubS[1]))
-                    {
-                        JOptionPane.showMessageDialog(null,Seleccionado.getText().toString()+"  "+x+","+y,"",2);
-                        JButton nuevo= new JButton(evt.getActionCommand());
-                        tablaCreciente[x][y]=Seleccionado.getText().toString();
-                        Seleccionado.setText("");
-                        for(int i=0;i<filas;i++)
-                        {
+                    int c=columnas,f=filas;
+                    if(objeto.contains("fila"))filas++;
+                    if(objeto.contains("columna"))columnas++;
+                    panel.removeAll();
+                    botonMat();
+                    panel.updateUI();
+                    tablaCreciente=new String[columnas][filas];
+                    for(int i=0;i<filas;i++){
+                        for(int j=0;j<columnas;j++){
+                            tablaCreciente[j][i]="-";
+                        }
+                    }
+                    if(filas>f){
+                        for(int i=0;i<f;i++){
                             for(int j=0;j<columnas;j++){
-                                System.out.print(tablaCreciente[j][i]);
+                                tablaCreciente[j][i]=tablaAux[j][i];
                             }
-                            System.out.print("\n");
                         }
-                        
-                        
-                        
                     }
-                    else
-                        Seleccionado.setText("carita triste");
-                   
+                    else{
+                        for(int i=0;i<filas;i++){
+                            for(int j=0;j<c;j++){
+                                tablaCreciente[j][i]=tablaAux[j][i];
+                            }
+                        }
+                    }
+
+                    tablaAux=new String[columnas][filas];
                 }
+                //Piso
+                else if(objeto.contains(",126,2,")){
+                    if(Pila.isSelected())
+                        Seleccionado.setText(Piso.inicio.Nombre);
+                    else
+                        Seleccionado.setText(Piso.fin.Nombre);
+                    valor=0;
+                }
+                //pared
+                else if(objeto.contains(",188,2,")){
+                if(Pila.isSelected())
+                        Seleccionado.setText(Pared.inicio.Nombre);
+                    else
+                        Seleccionado.setText(Pared.fin.Nombre);
+                    valor=1;
+                }
+                //goomba
+                else if(objeto.contains(",250,2,")){
+                if(Pila.isSelected())
+                        Seleccionado.setText(Goomba.inicio.Nombre);
+                    else
+                        Seleccionado.setText(Goomba.fin.Nombre);
+                    valor=2;
+                }
+                //koopa
+                else if(objeto.contains(",312,2,")){
+                if(Pila.isSelected())
+                        Seleccionado.setText(Koopa.inicio.Nombre);
+                    else
+                        Seleccionado.setText(Koopa.fin.Nombre);
+                    valor=3;
+                }
+                //ficha
+                else if(objeto.contains(",374,2,")){
+                if(Pila.isSelected())
+                        Seleccionado.setText(Ficha.inicio.Nombre);
+                    else
+                        Seleccionado.setText(Ficha.fin.Nombre);
+                    valor=4;
+                }
+                //hongo
+                else if(objeto.contains(",436,2,")){
+                if(Pila.isSelected())
+                        Seleccionado.setText(Hongo.inicio.Nombre);
+                    else
+                        Seleccionado.setText(Hongo.fin.Nombre);
+                    valor=5;
+                }
+                //mario
+                else if(objeto.contains(",498,2,")){
+                    Seleccionado.setText(Mario);
+                    valor=6;
+                }
+                //castillo
+                else if(objeto.contains(",560,2,")){
+                    Seleccionado.setText(Castillo);
+                    valor=7;
+                }
+                else if(objeto.contains("INICIA EL JUEGO")){
+                    this.dispose();
+                    new Ventana(800,600,"Mario Maker", new Juego());
+                }
+                else {
+                    if(Pila.isSelected()){
+                        Tipo=true;
+                    }else
+                    {
+                        Tipo=false;
+                    }
+                    if (Seleccionado.getText().equals("")){
+                        JOptionPane.showMessageDialog(null,SubS[0]+","+SubS[1]+"no carga porque no \n"
+                                + "se le ha asignado ningun dato","advertencia", 2);
+                    }
+                    else{
+                        int x=Integer.parseInt(SubS[0])/50,y=Integer.parseInt(SubS[1])/50;
+                        System.out.println(objeto);
+                        if(objeto.contains(SubS[0]+","+SubS[1]))
+                        {
+                            JOptionPane.showMessageDialog(null,Seleccionado.getText().toString()+"  "+x+","+y,"",2);
+                            JButton nuevo= new JButton(evt.getActionCommand());
+                            tablaCreciente[x][y]=Seleccionado.getText().toString();
+                            Seleccionado.setText("");
+                            for(int i=0;i<filas;i++)
+                            {
+                                for(int j=0;j<columnas;j++){
+                                    System.out.print(tablaCreciente[j][i]);
+                                }
+                                System.out.print("\n");
+                            }
+                        }
+                        else
+                            Seleccionado.setText("carita triste");
+
+                    }
+
+                }
+            }catch(Exception e){
                 
             }
           
@@ -371,7 +372,7 @@ public class mOrtogonal extends JFrame implements ActionListener{
             case 5:
                 return "hongo.png";
             case 6:
-                return "marior.gif";
+                return "marioR.gif";
             case 7:
                 return "castillo.png";
             default:

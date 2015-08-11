@@ -146,13 +146,15 @@ public class Personaje  implements ActionListener,FocusListener {
     public JLabel llenarMenu(int i){
         JLabel nuevo = new JLabel();
         if(i<8){
+            try{
             ImageIcon icon = new ImageIcon(getClass().getResource("/com/juego/mariomaker/personajes/"+retornaNombre(i)));
             Image refac = icon.getImage();
             Image Ima = refac.getScaledInstance(50, 50, java.awt.Image.SCALE_DEFAULT);
             ImageIcon ico = new ImageIcon(Ima);
             /**/
             nuevo.setIcon(ico);
-            nuevo.setBounds(20, i*70+50, 50, 50);
+            nuevo.setBounds(20, i*70+50, 50, 50);}
+            catch(Exception e){nuevo.setText(retornaNombre(i));}
             
          }
         return nuevo;
@@ -173,7 +175,7 @@ public class Personaje  implements ActionListener,FocusListener {
             case 5:
                 return "hongo.png";
             case 6:
-                return "marior.gif";
+                return "marioR.gif";
             case 7:
                 return "castillo.png";
             default:

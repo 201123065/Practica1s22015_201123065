@@ -82,6 +82,31 @@ public class Lista {
         JOptionPane.showMessageDialog(null,nombre+" ahora es "+aux.Nombre,"Personaje",3);
     }
   
+    public void EliminarInicio() {
+        if(!estaVacia())
+        {
+            if(inicio==fin){
+                inicio=fin=aux=null;
+            }
+            else{
+                inicio=inicio.siguiente;
+                inicio.anterior=null;
+            }
+        }
+    }
+    public void EliminarFin() {
+        if(!estaVacia())
+        {
+            if(inicio==fin){
+                inicio=fin=aux=null;
+            }
+            else{
+                fin=fin.anterior;
+                fin.siguiente=null;
+            }
+        }
+    }
+    
     
     public Nodo EliminarDato(String id, String nombre) {
         if(!estaVacia())
@@ -128,6 +153,9 @@ public class Lista {
         
         return aux;
     }
+    
+    
+    
     //mostrar la lista
     public Nodo retornarValorSiguiente(){
         Nodo temp;
