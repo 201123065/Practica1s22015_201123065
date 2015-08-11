@@ -37,8 +37,7 @@ public class mOrtogonal extends JFrame implements ActionListener{
     JButton ploteo;
     
     String cadena="";
-    int valor=0;
-    
+    int valor=10;
     ButtonGroup group;
     public void constructor(Lista Piso,Lista Pared,Lista Goomba,
             Lista Koopa,Lista Ficha,Lista Hongo,
@@ -121,7 +120,7 @@ public class mOrtogonal extends JFrame implements ActionListener{
         this.setSize(410, 330);
 	//Permite que la ventana se coloque al centro de la pantalla
 	this.setLocationRelativeTo(null);
-        botonMat();
+        
         tablaCreciente= new String[columnas][filas];
         tablaAux=new String [columnas][filas];
         for(int i=0;i<filas;i++)
@@ -132,6 +131,7 @@ public class mOrtogonal extends JFrame implements ActionListener{
                 tablaAux[j][i]="-";
             }
         }
+        botonMat(valor);
 
     }
     
@@ -154,9 +154,7 @@ public class mOrtogonal extends JFrame implements ActionListener{
                     int c=columnas,f=filas;
                     if(objeto.contains("fila"))filas++;
                     if(objeto.contains("columna"))columnas++;
-                    panel.removeAll();
-                    botonMat();
-                    panel.updateUI();
+                    botonMat(valor);
                     tablaCreciente=new String[columnas][filas];
                     for(int i=0;i<filas;i++){
                         for(int j=0;j<columnas;j++){
@@ -269,6 +267,7 @@ public class mOrtogonal extends JFrame implements ActionListener{
                                 }
                                 System.out.print("\n");
                             }
+                            botonMat(valor);
                         }
                         else
                             Seleccionado.setText("carita triste");
@@ -293,22 +292,34 @@ public class mOrtogonal extends JFrame implements ActionListener{
             return ico;
         }
         
-        public void botonMat(){
+        public void botonMat(int i){
+            panel.removeAll();
             for( int fila = 0 ; fila < filas; fila++ )
+            {
+                for( int columna = 0 ; columna < columnas; columna++ )
                 {
-                    for( int columna = 0 ; columna < columnas; columna++ )
-                    {
-                        JButton temp = Boton ( 50 * columna, 50 * fila, 50, 50 );
+                    if(tablaCreciente[columna][fila]=="-"){
+                        JButton temp = Boton ( 50 * columna, 50 * fila, 50, 50 ,false,10);
+                        temp.addActionListener(this);
+                        panel.add(temp);
+                    }
+                    else{
+                        JButton temp = Boton ( 50 * columna, 50 * fila, 50, 50 ,true,i);
                         temp.addActionListener(this);
                         panel.add(temp);
                     }
                 }
+            }
+            panel.updateUI();
         }
 
-        public JButton  Boton( int pos_x, int pos_y, int ancho, int alto )
+        public JButton  Boton( int pos_x, int pos_y, int ancho, int alto,boolean imagen ,int i)
         { 
             JButton boton = new JButton();
             boton.setBounds(pos_x, pos_y, ancho, alto);
+            if(imagen){
+                boton.setIcon(icono(i));
+            }
             return boton;
         
         }
