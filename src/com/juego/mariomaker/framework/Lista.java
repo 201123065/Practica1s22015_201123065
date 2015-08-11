@@ -18,7 +18,7 @@ public class Lista {
     public boolean estaVacia(){
         return inicio==null;
     }
-    //agregar al final
+    //agregar al final-----------------metodo:Cola------------------
     public void AgregaFinal(String id, String nombre, String imagen){
         if(!estaVacia())
         {
@@ -34,6 +34,25 @@ public class Lista {
             
         }
     }
+    //agregar al final-----------------metodo:pila------------------
+    public void AgregaInicio(String id, String nombre, String imagen){
+        if(!estaVacia())
+        {
+            //el puntero siguiente del fin anterior es fin
+            inicio=new Nodo(id,nombre,imagen,inicio,null);
+            inicio.siguiente.anterior=inicio;
+            JOptionPane.showMessageDialog(null, "agregado correctamente, ya habian antes","exito",3);
+            
+        }else
+        {
+            aux=inicio=fin=new Nodo(id,nombre,imagen);
+            JOptionPane.showMessageDialog(null, "agregado correctamente","exito",3);
+            
+        }
+    }
+    
+    
+    
     
     public void ModificarDato(String id, String nombre,String nom){
         if(!estaVacia())

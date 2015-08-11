@@ -118,14 +118,14 @@ public class mOrtogonal extends JFrame implements ActionListener{
 	//Permite que la ventana se coloque al centro de la pantalla
 	this.setLocationRelativeTo(null);
         botonMat();
-        tablaCreciente= new String[columnas+1][filas+1];
-        tablaAux=new String [columnas+2][filas+2];
+        tablaCreciente= new String[columnas][filas];
+        tablaAux=new String [columnas][filas];
         for(int i=0;i<filas;i++)
         {
             for(int j=0;j<columnas;j++)
             {
-                 tablaCreciente[i][j]="-";
-                tablaAux[i][j]="-";
+                tablaCreciente[j][i]="-";
+                tablaAux[j][i]="-";
             }
         }
 
@@ -140,18 +140,43 @@ public class mOrtogonal extends JFrame implements ActionListener{
             String subCadena=objeto.substring(21,objeto.length()-408);
             String SubS[]=subCadena.split(",");
             //posicion X::= SubS[0]
-            System.out.println(SubS[1]);
-            //Posicion Y::= SubS[1]
             if(objeto.contains("fila")||objeto.contains("columna")){
+                for(int i=0;i<filas;i++){
+                    for(int j=0;j<columnas;j++){
+                        tablaAux[j][i]=tablaCreciente[j][i];
+                    }
+                }
+                int c=columnas,f=filas;
                 if(objeto.contains("fila"))filas++;
                 if(objeto.contains("columna"))columnas++;
                 panel.removeAll();
                 botonMat();
-                tablaAux=tablaCreciente;
-                tablaCreciente=new String[filas][columnas];
-                tablaCreciente=tablaAux;
-                tablaAux=new String[filas+1][columnas+1];
                 panel.updateUI();
+                tablaCreciente=new String[columnas][filas];
+                for(int i=0;i<filas;i++){
+                    for(int j=0;j<columnas;j++){
+                        tablaCreciente[j][i]="-";
+                    }
+                }
+                if(filas>f){
+                    for(int i=0;i<f;i++){
+                        for(int j=0;j<columnas;j++){
+                            tablaCreciente[j][i]=tablaAux[j][i];
+                        }
+                    }
+                }
+                else{
+                    for(int i=0;i<filas;i++){
+                        for(int j=0;j<c;j++){
+                            tablaCreciente[j][i]=tablaAux[j][i];
+                        }
+                    }
+                }
+                
+                tablaAux=new String[columnas][filas];
+                
+                
+                
                 
             }
             //Piso
@@ -234,8 +259,16 @@ public class mOrtogonal extends JFrame implements ActionListener{
                     {
                         JOptionPane.showMessageDialog(null,Seleccionado.getText().toString()+"  "+x+","+y,"",2);
                         JButton nuevo= new JButton(evt.getActionCommand());
-                        tablaCreciente[y][x]=Seleccionado.getText().toString();
+                        tablaCreciente[x][y]=Seleccionado.getText().toString();
                         Seleccionado.setText("");
+                        for(int i=0;i<filas;i++)
+                        {
+                            for(int j=0;j<columnas;j++){
+                                System.out.print(tablaCreciente[j][i]);
+                            }
+                            System.out.print("\n");
+                        }
+                        
                         
                         
                     }
