@@ -523,11 +523,12 @@ public class Personaje  implements ActionListener,FocusListener {
                     Hongo.ModificarDato(Hongo.aux.ID,Hongo.aux.Nombre, cadenas);
                     break;
                 case 6:
-                    cadena=Mario;
-                    JOptionPane.showMessageDialog(null, Mario+"ha sido agregado con exito","Personaje",3);
+                    Mario=cadena;
+                    JOptionPane.showMessageDialog(null, Mario+"ha sido modificado con exito","Personaje",3);
                     break;
                 case 7:
-                    Mario=cadena;
+                    Castillo=cadena;
+                    JOptionPane.showMessageDialog(null, Castillo+"ha sido modificado con exito","Personaje",3);
                     break;
         }
         
@@ -581,10 +582,13 @@ public class Personaje  implements ActionListener,FocusListener {
             Ficha.AgregaFinal(id, nombre, imagen);
         else if(tipo== "hongo.png")
             Hongo.AgregaFinal(id, nombre, imagen);
-        else if(tipo== "marior.gif")
+        else if(tipo== "marior.gif"){
              Mario=nombre;
-        else if(tipo== "castillo.png")
+             JOptionPane.showMessageDialog(null, Mario+"ha sido agregado con exito","Personaje",3);}
+        else if(tipo== "castillo.png"){
             Castillo=nombre;
+            JOptionPane.showMessageDialog(null, Castillo+"ha sido agregado con exito","Personaje",3);
+        }
         else 
         {   
             JOptionPane.showMessageDialog(null, "que pedo, error :=","exito",3);
