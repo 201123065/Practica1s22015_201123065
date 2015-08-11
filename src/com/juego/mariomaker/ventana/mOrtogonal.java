@@ -229,28 +229,26 @@ public class mOrtogonal extends JFrame implements ActionListener{
                 }
                 else{
                     int x=Integer.parseInt(SubS[0])/50,y=Integer.parseInt(SubS[1])/50;
+                    System.out.println(objeto);
                     if(objeto.contains(SubS[0]+","+SubS[1]))
                     {
                         JOptionPane.showMessageDialog(null,Seleccionado.getText().toString()+"  "+x+","+y,"",2);
                         JButton nuevo= new JButton(evt.getActionCommand());
-                        tablaCreciente[x][y]=Seleccionado.getText().toString();
+                        tablaCreciente[y][x]=Seleccionado.getText().toString();
                         Seleccionado.setText("");
-                        for(int i=0;i<filas;i++)
-                        {
-                            for(int j=0;j<columnas;j++){
-                                System.out.print(tablaCreciente[i][j]);
-                            }
-                            System.out.print("\n");
-                        }
+                        
                         
                     }
                     else
                         Seleccionado.setText("carita triste");
+                   
                 }
                 
             }
           
 	} 
+        
+        
         
         public ImageIcon icono(int i)
         {

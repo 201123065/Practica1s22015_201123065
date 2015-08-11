@@ -4,14 +4,14 @@ rankdir=LR;
  node [shape=record,width=.1,height=.1];
 
  node0 [label = "<f0> Piso|<f1> Pared|<f2>Goomba |<f3> Koopa|<f4> Ficha|<f5>Hongo |<f6>Mario |<f7>Castillo| ",height=2.5];
- node [width = 1.5];node1 [label = "{<n> prueba|gg:prueba|ggpruebajj}"];
-node2 [label = "{<n> prueba}"];
-node3 [label = "{<n> prueba}"];
-node4 [label = "{<n> prueba}"];
-node5 [label = "{<n> prueba}"];
-node6 [label = "{<n> pruebassa|2}"];
-node7 [label="{ prueba }"];
-node8 [label="{ prueba }"];
+ node [width = 1.5];node1 [label = "{<n> cubo|cubo}"];
+node2 [label = "{<n> mamada}"];
+node3 [label = "{<n> mugro}"];
+node4 [label = "{<n> mugro}"];
+node5 [label = "{<n> mugromugro}"];
+node6 [label = "{<n> Sffmugro}"];
+node7 [label="{ mario }"];
+node8 [label="{ castillo }"];
 
 node0:f0 -> node1:n;
  node0:f1 -> node1:n;
