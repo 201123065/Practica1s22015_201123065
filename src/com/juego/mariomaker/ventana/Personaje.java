@@ -136,7 +136,7 @@ public class Personaje  implements ActionListener,FocusListener {
    }
   
     public JTextField texto(int i){
-        JTextField nuevo= new JTextField("prueba");
+        JTextField nuevo= new JTextField("");
         nuevo.setBounds(100, i*70+50, 500, 50);
         nuevo.addFocusListener(this);
         return nuevo;
