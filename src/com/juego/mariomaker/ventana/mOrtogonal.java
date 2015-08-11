@@ -19,6 +19,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -33,6 +34,10 @@ public class mOrtogonal extends JFrame implements ActionListener{
     Lista Piso,Pared, Goomba,Koopa,Ficha, Hongo;
     String Mario,Castillo;
     Boolean Tipo;
+    
+    
+    String cadena="";
+    int valor=0;
     
     ButtonGroup group;
     public void constructor(Lista Piso,Lista Pared,Lista Goomba,
@@ -53,8 +58,7 @@ public class mOrtogonal extends JFrame implements ActionListener{
     {
         constructor(Piso,Pared, Goomba,Koopa,Ficha, Hongo,Mario,Castillo);
         JToolBar barraHerramientas = new JToolBar();
-        JLabel lblFilas = new JLabel();
-	JLabel lblColumnas = new JLabel();
+        
         
        btnFila = new JButton();
         btnColumna = new JButton();
@@ -80,7 +84,7 @@ public class mOrtogonal extends JFrame implements ActionListener{
         group.add(Cola);
         
         //fin JRadioButton
-        Seleccionado = new JLabel();
+        Seleccionado = new JLabel("");
 	barraHerramientas.add(Pila);
 	barraHerramientas.add(Cola);
 	barraHerramientas.add(BPiso);
@@ -91,16 +95,21 @@ public class mOrtogonal extends JFrame implements ActionListener{
 	barraHerramientas.add(BHongo);
 	barraHerramientas.add(BMario);
 	barraHerramientas.add(BCastillo);
-        barraHerramientas.add(Seleccionado);
         
-	lblColumnas.setText("Columnas");
-	barraHerramientas.add(lblColumnas);
+        JButton juega = new JButton("INICIA EL JUEGO");
+        juega.addActionListener(this);
+        
+	barraHerramientas.add(juega);
+        
+        
+        
 	btnFila.setText("fila");
         btnColumna.setText("columna");
 	btnFila.addActionListener(this);
         btnColumna.addActionListener(this);
 	barraHerramientas.add(btnFila);
         barraHerramientas.add(btnColumna);
+        barraHerramientas.add(Seleccionado);
 	//Colocamos el JToolBar en la parte de arriba del JFrame
 	this.add(barraHerramientas, BorderLayout.PAGE_START);
 	//Se agrega el panel a boton
@@ -109,61 +118,171 @@ public class mOrtogonal extends JFrame implements ActionListener{
 	//Permite que la ventana se coloque al centro de la pantalla
 	this.setLocationRelativeTo(null);
         botonMat();
+        tablaCreciente= new String[columnas+1][filas+1];
+        tablaAux=new String [columnas+2][filas+2];
+        for(int i=0;i<filas;i++)
+        {
+            for(int j=0;j<columnas;j++)
+            {
+                 tablaCreciente[i][j]="-";
+                tablaAux[i][j]="-";
+            }
+        }
 
     }
     
 
 	public void actionPerformed( ActionEvent evt ) {
+            
+            
             String objeto = evt.getSource().toString();
+            
+            String subCadena=objeto.substring(21,objeto.length()-408);
+            String SubS[]=subCadena.split(",");
+            //posicion X::= SubS[0]
+            System.out.println(SubS[1]);
+            //Posicion Y::= SubS[1]
             if(objeto.contains("fila")||objeto.contains("columna")){
                 if(objeto.contains("fila"))filas++;
                 if(objeto.contains("columna"))columnas++;
                 panel.removeAll();
                 botonMat();
+                tablaAux=tablaCreciente;
+                tablaCreciente=new String[filas][columnas];
+                tablaCreciente=tablaAux;
+                tablaAux=new String[filas+1][columnas+1];
                 panel.updateUI();
                 
             }
-            
             //Piso
             else if(objeto.contains(",126,2,")){
-                System.out.print("PISO");
+                if(Pila.isSelected())
+                    Seleccionado.setText(Piso.inicio.Nombre);
+                else
+                    Seleccionado.setText(Piso.fin.Nombre);
+                valor=0;
             }
             //pared
-            else if(objeto.contains(",188,2,")){}
-            //goomba
-            else if(objeto.contains(",250,2,")){}
-            //koopa
-            else if(objeto.contains(",312,2,")){}
-            //ficha
-            else if(objeto.contains(",374,2,")){}
-            //hongo
-            else if(objeto.contains(",436,2,")){}
-            //mario
-            else if(objeto.contains(",498,2,")){}
-            //castillo
-            else if(objeto.contains(",560,2,")){}
-            //JRadioButton Pilas
-            else if(Pila.isSelected()){
-                Tipo=true;
-            }else if(Cola.isSelected()){
-                Tipo=false;
+            else if(objeto.contains(",188,2,")){
+            if(Pila.isSelected())
+                    Seleccionado.setText(Pared.inicio.Nombre);
+                else
+                    Seleccionado.setText(Pared.fin.Nombre);
+                valor=1;
             }
-	}       
+            //goomba
+            else if(objeto.contains(",250,2,")){
+            if(Pila.isSelected())
+                    Seleccionado.setText(Goomba.inicio.Nombre);
+                else
+                    Seleccionado.setText(Goomba.fin.Nombre);
+                valor=2;
+            }
+            //koopa
+            else if(objeto.contains(",312,2,")){
+            if(Pila.isSelected())
+                    Seleccionado.setText(Koopa.inicio.Nombre);
+                else
+                    Seleccionado.setText(Koopa.fin.Nombre);
+                valor=3;
+            }
+            //ficha
+            else if(objeto.contains(",374,2,")){
+            if(Pila.isSelected())
+                    Seleccionado.setText(Ficha.inicio.Nombre);
+                else
+                    Seleccionado.setText(Ficha.fin.Nombre);
+                valor=4;
+            }
+            //hongo
+            else if(objeto.contains(",436,2,")){
+            if(Pila.isSelected())
+                    Seleccionado.setText(Hongo.inicio.Nombre);
+                else
+                    Seleccionado.setText(Hongo.fin.Nombre);
+                valor=5;
+            }
+            //mario
+            else if(objeto.contains(",498,2,")){
+                Seleccionado.setText(Mario);
+                valor=6;
+            }
+            //castillo
+            else if(objeto.contains(",560,2,")){
+                Seleccionado.setText(Castillo);
+                valor=7;
+            }
+            else if(objeto.contains("INICIA EL JUEGO")){
+                this.dispose();
+                new Ventana(800,600,"Mario Maker", new Juego());
+            }
+            else {
+                if(Pila.isSelected()){
+                    Tipo=true;
+                }else
+                {
+                    Tipo=false;
+                }
+                if (Seleccionado.getText().equals("")){
+                    JOptionPane.showMessageDialog(null,SubS[0]+","+SubS[1]+"no carga porque no \n"
+                            + "se le ha asignado ningun dato","advertencia", 2);
+                }
+                else{
+                    int x=Integer.parseInt(SubS[0])/50,y=Integer.parseInt(SubS[1])/50;
+                    if(objeto.contains(SubS[0]+","+SubS[1]))
+                    {
+                        JOptionPane.showMessageDialog(null,Seleccionado.getText().toString()+"  "+x+","+y,"",2);
+                        JButton nuevo= new JButton(evt.getActionCommand());
+                        tablaCreciente[x][y]=Seleccionado.getText().toString();
+                        Seleccionado.setText("");
+                        for(int i=0;i<filas;i++)
+                        {
+                            for(int j=0;j<columnas;j++){
+                                System.out.print(tablaCreciente[i][j]);
+                            }
+                            System.out.print("\n");
+                        }
+                        
+                    }
+                    else
+                        Seleccionado.setText("carita triste");
+                }
+                
+            }
+          
+	} 
+        
+        public ImageIcon icono(int i)
+        {
+            ImageIcon icon = new ImageIcon(getClass().getResource("/com/juego/mariomaker/personajes/"+retornaNombre(i)));
+            Image refac = icon.getImage();
+            Image Ima = refac.getScaledInstance(50, 50, java.awt.Image.SCALE_DEFAULT);
+            ImageIcon ico = new ImageIcon(Ima);
+            return ico;
+        }
         
         public void botonMat(){
             for( int fila = 0 ; fila < filas; fila++ )
                 {
                     for( int columna = 0 ; columna < columnas; columna++ )
                     {
-                        botones = new Boton[ filas ][ columnas ];
-                        botones[fila][columna] = new Boton( 50 * columna, 50 * fila, 50, 50 );
-
-                        botones[fila][columna].setNombre(fila, columna);
-                        panel.add( botones[fila][columna] );
+                        JButton temp = Boton ( 50 * columna, 50 * fila, 50, 50 );
+                        temp.addActionListener(this);
+                        panel.add(temp);
                     }
                 }
         }
 
+        public JButton  Boton( int pos_x, int pos_y, int ancho, int alto )
+        { 
+            JButton boton = new JButton();
+            boton.setBounds(pos_x, pos_y, ancho, alto);
+            return boton;
+        
+        }
+        
+        
+        
         public void juegoBotones(){
             
             
@@ -205,13 +324,7 @@ public class mOrtogonal extends JFrame implements ActionListener{
             
 	
         }
-        public ImageIcon icono(int i){
-            ImageIcon icon = new ImageIcon(getClass().getResource("/com/juego/mariomaker/personajes/"+retornaNombre(i)));
-            Image refac = icon.getImage();
-            Image Ima = refac.getScaledInstance(50, 50, java.awt.Image.SCALE_DEFAULT);
-            ImageIcon ico = new ImageIcon(Ima);
-            return ico;
-        }
+        
         public String retornaNombre(int valor){
         switch (valor){
             case 0:
@@ -237,14 +350,15 @@ public class mOrtogonal extends JFrame implements ActionListener{
         }
     }
         
-	Boton [][]botones;
         int filas=3,columnas=4;
 	JButton btnFila;
         JButton btnColumna;
 	JPanel panel;
-        JScrollPane panelS;
         JButton BPiso,BPared,BGoomba,BKoopa,BFicha,BHongo,BMario,BCastillo;
         String temporal;
         JLabel Seleccionado;
         JRadioButton Pila,Cola;
+        
+        String[][] tablaCreciente;
+        String[][] tablaAux;
 }

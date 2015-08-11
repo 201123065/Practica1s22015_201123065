@@ -4,7 +4,7 @@ package com.juego.mariomaker.framework;
 import javax.swing.JOptionPane;
 
 public class Lista {
-    private Nodo inicio,fin;
+    public Nodo inicio,fin;
     
     
     public Nodo aux;
